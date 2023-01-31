@@ -9,3 +9,9 @@ Project description:
 Members:
  Back end: Amanda Smith, Ananya Kakaveti
  Front End: Chandini Palem, Anisha Paul
+
+User Stories: 
+[1] As an app visitor, I want to be able to have an account that I can access via a login page so that I can have access to my posts.
+[2] As a music creator, I want to see which of my songs are trending so that I can make similar songs.
+[3] As a music enthusiast, I want to see my friends’ current favorite songs so that I can add them to my playlist. 
+[4] As an app visitor, I want to be able to like my friends posts so I can find new music to listen to. 
