@@ -15,3 +15,5 @@ User Stories:
 [2] As a music creator, I want to see which of my songs are trending so that I can make similar songs.
 [3] As a music enthusiast, I want to see my friends’ current favorite songs so that I can add them to my playlist. 
 [4] As an app visitor, I want to be able to like my friends posts so I can find new music to listen to. 
+[5] As a user with an account, I would like to be able to have my password safe and stored so I can log out and in as I please.
+[6] As an individual who has friends on the app, I want to be able to see my friends on my page. 
