@@ -1,5 +1,13 @@
 .App {
   text-align: center;
+  background-color: rgb(39, 36, 36);
+  background-image: url(musicWave.jpeg);
+
+}
+
+.style{
+  height: 100%;
+  background-color: black;
 }
 
 .App-logo {
@@ -14,7 +22,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #8dace9;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +43,35 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.text{
+  color: white;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.checkbox{
+  color: white;
 }
