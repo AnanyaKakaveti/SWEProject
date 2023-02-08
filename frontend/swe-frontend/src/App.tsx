@@ -8,8 +8,8 @@ Connect();
 }, []);
 
 const handleClick = () => {
-console.log("hello");
-SendMessage("hello");
+console.log("user loging in...");
+SendMessage("user loging in...");
 };
 
 return (
