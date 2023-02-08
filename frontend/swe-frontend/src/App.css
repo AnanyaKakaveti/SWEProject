@@ -7,9 +7,15 @@
 
 .style{
   height: 100%;
-  background-color: black;
+  background-color: white;
+  font-size: 100px;
 }
 
+.slogan{
+  color: white;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
