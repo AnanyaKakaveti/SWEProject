@@ -5,7 +5,7 @@ import { Connect, SendMessage } from "./api";
 import Nav from "./components/nav";
 import Home from "./components/Home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Register from "./components/Register";
+import Reg from "./Reg";
 
 
 function App(){
@@ -15,8 +15,8 @@ Connect();
 }, []);
 
 const handleClick = () => { 
-console.log("hello");
-SendMessage("hello");
+console.log("User loging in");
+SendMessage("User loging in");
 };
 
 return(
@@ -27,11 +27,11 @@ return(
          <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/login" element={<Login/>} />
-            <Route path="/Register" element={<Register/>} />
+            <Route path="/Register" element={<Reg/>} />
             </Routes>  
     </main>
     </BrowserRouter>
-    <button onClick={handleClick}>Hit</button>
+    {/* <button onClick={handleClick}>Hit</button> */}
         </div>
 );
 };
