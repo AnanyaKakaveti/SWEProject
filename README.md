@@ -18,4 +18,7 @@ User Stories:
 [5] As a user with an account, I would like to be able to have my password safe and stored so I can log out and in as I please.
 [6] As an individual who has friends on the app, I want to be able to see my friends on my page. 
 
-THIS BETTER WORK 
+Tutorials used: 
+Login page: https://www.youtube.com/watch?v=d4Y2DkKbxM0
+Websocket and Backend: https://tutorialedge.net/projects/chat-system-in-go-and-react/part-4-handling-multiple-clients/
+Bootstrap: https://getbootstrap.com/docs/5.3/examples/

@@ -5,7 +5,7 @@ const Connect = () => {
 
   socket.onopen = () => {
     console.log("Successfully Connected");
-  };
+  };    
 
   socket.onmessage = (msg: MessageEvent) => {
     console.log(msg.data);
