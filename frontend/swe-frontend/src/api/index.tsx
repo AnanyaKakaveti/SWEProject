@@ -1,28 +1,28 @@
 const socket = new WebSocket("ws://localhost:8080/ws");
 
 const Connect = () => {
-  console.log("Attempting Connection...");
+  console.log("Attempting Connection...");
 
-  socket.onopen = () => {
-    console.log("Successfully Connected");
-  };    
+  socket.onopen = () => {
+    console.log("Successfully Connected");
+  };    
 
-  socket.onmessage = (msg: MessageEvent) => {
-    console.log(msg.data);
-  };
+  socket.onmessage = (msg: MessageEvent) => {
+    console.log(msg.data);
+  };
 
-  socket.onclose = (event: CloseEvent) => {
-    console.log(`Socket Closed Connection: ${event}`);
-  };
+  socket.onclose = (event: CloseEvent) => {
+    console.log(`Socket Closed Connection: ${event}`);
+  };
 
-  socket.onerror = (error: Event) => {
-    console.log(`Socket Error: ${error}`);
-  };
+  socket.onerror = (error: Event) => {
+    console.log(`Socket Error: ${error}`);
+  };
 };
 
 const SendMessage = (msg: string) => {
-  console.log(`Sending msg: ${msg}`);
-  socket.send(msg);
+  console.log(`Sending msg: ${msg}`);
+  socket.send(msg);
 };
 
 export { Connect, SendMessage }
