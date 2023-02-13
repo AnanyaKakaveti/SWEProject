@@ -1,5 +1,5 @@
 import React, {SyntheticEvent, useState} from 'react'
-import { Connect, SendMessage } from "./api";
+import { Connect, SendMessage } from "../api";
 import {Link} from "react-router-dom";
 // import Button from "react-bootstrap/Button";
 
@@ -37,7 +37,7 @@ const Reg = () => {
           <input type="password" className="form-control" id="floatingPassword" placeholder="Password" required
             onChange = {e => setPassword(e.target.value)}/>
                
-        <Link to="/Login">
+        <Link to="/Post">
             <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleClick}>Sign in</button>
         </Link>    
         

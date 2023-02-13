@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 import { Connect, SendMessage } from "./api";
 import Nav from "./components/nav";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Reg from "./Reg";
+import Reg from "./pages/Reg";
+
+import Post from "./pages/Post";
 
 
 function App(){
@@ -27,13 +29,24 @@ return(
          <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/login" element={<Login/>} />
-            <Route path="/Register" element={<Reg/>} />
-            </Routes>  
+            <Route path="/register" element={<Reg/>} />
+            <Route path="/post" element={<Post/>} />
+        </Routes>  
     </main>
     </BrowserRouter>
     {/* <button onClick={handleClick}>Hit</button> */}
-        </div>
+      </div>
+
+/*
+<div className='App2'>
+<Routes>
+   <Route path="/post" element={<Post/>} />
+</Routes>  
+</div>
+*/
+
 );
+
 };
 
 export default App;
