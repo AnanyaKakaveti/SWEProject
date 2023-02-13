@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Reg from "./pages/Reg";
 
-import Post from "./pages/Post";
+import Search from "./pages/Search";
 
 
 function App(){
@@ -30,20 +30,12 @@ return(
             <Route path="/" element={<Home/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Reg/>} />
-            <Route path="/post" element={<Post/>} />
+            <Route path="/search" element={<Search/>} />
         </Routes>  
     </main>
     </BrowserRouter>
     {/* <button onClick={handleClick}>Hit</button> */}
       </div>
-
-/*
-<div className='App2'>
-<Routes>
-   <Route path="/post" element={<Post/>} />
-</Routes>  
-</div>
-*/
 
 );
 
