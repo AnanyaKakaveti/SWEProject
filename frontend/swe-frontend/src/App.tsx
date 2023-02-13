@@ -15,8 +15,8 @@ Connect();
 }, []);
 
 const handleClick = () => { 
-console.log("User loging in");
-SendMessage("User loging in");
+console.log("User logging in");
+SendMessage("User logging in");
 };
 
 return(
