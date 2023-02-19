@@ -12,7 +12,7 @@ const Home: React.FC = () => {
             </p>
             <Typed 
             className= "artists" 
-            strings = {['Taylor Swift', 'Michael Jackson', 'The Weeknd', 'Queen', 'Justin Bieber', 'Madonna', 'The Beatles']} 
+            strings = {['Taylor Swift', 'Michael Jackson', 'The Weeknd', 'Queen', 'Justin Bieber', 'Madonna', 'The Beatles', 'BTS']} 
             typeSpeed={80} 
             backSpeed={70} 
             // startDelay={200} 
