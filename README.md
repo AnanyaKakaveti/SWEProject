@@ -22,3 +22,24 @@ Tutorials used:
 Login page: https://www.youtube.com/watch?v=d4Y2DkKbxM0
 Websocket and Backend: https://tutorialedge.net/projects/chat-system-in-go-and-react/part-4-handling-multiple-clients/
 Bootstrap: https://getbootstrap.com/docs/5.3/examples/
+
+SQL Database Installation: 
+download MySQL Community Server, MySQL Workbench ** Remember password you created during installation, will need later**
+
+Go Installation: 
+terminal: 
+go get "github.com/gofiber/fiber/v2
+go get -u gorm.io/gorm
+go get -u gorm.io/driver/mysql 
+
+get VSCode extension: MySQL managment by Jun Han
+
+Data base Set up: 
+create new connection. host: local host, user: root, pass: pass u created
+HOW TO FIX ERROR: 
+follow these tutorials: 
+https://www.geeksforgeeks.org/how-to-connect-to-mysql-server-using-vs-code-and-fix-errors/
+https://stackoverflow.com/questions/10577374/mysql-command-not-found-in-os-x-10-7
+
+Download Postman: https://www.postman.com/downloads/
+
