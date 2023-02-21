@@ -6,6 +6,7 @@ import Nav from "./components/nav";
 import Home from "./components/Home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Reg from "./Reg";
+import Search from "./components/Search";
 
 
 function App(){
@@ -24,11 +25,12 @@ return(
         <BrowserRouter>
         <Nav/>
         <main className="form-signin w-100 m-auto">
-         <Routes>
+        <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/Register" element={<Reg/>} />
-            </Routes>  
+            <Route path="/search" element={<Search/>} />
+        </Routes>  
     </main>
     </BrowserRouter>
     {/* <button onClick={handleClick}>Hit</button> */}

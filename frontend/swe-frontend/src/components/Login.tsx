@@ -1,9 +1,11 @@
 import react from 'react';
 import React, {SyntheticEvent, useState} from 'react';
+import { Navigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [redirect, setRedirect] = useState(false);
 
   const submit = async (e:SyntheticEvent) =>{
     e.preventDefault();
@@ -17,10 +19,13 @@ const Login = () => {
                 password
             })
         });
+    setRedirect(true);
   }
 
-
-    return (
+  if(redirect)
+  return <Navigate to= "/search"/>;
+  
+  return (
 
     <form onSubmit = {submit}>
         <h1 className="text">Welcome to JAM. Sign in below</h1>
