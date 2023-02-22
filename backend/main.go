@@ -14,7 +14,7 @@ import (
 
 type User struct {
 	Id       uint
-	Username string
+	Name string
 	Email    string
 	Password []byte
 }
@@ -45,7 +45,7 @@ func Register(c *fiber.Ctx) error {
 	// encrypts password
 	password, _ := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
 	user := User{
-		Username: data["username"],
+		Name: data["name"],
 		Email:    data["email"],
 		Password: password,
 	}

@@ -1,26 +1,38 @@
 import React, {SyntheticEvent, useState} from 'react'
+// import { Redirect } from 'react-router-dom';
 import { Connect, SendMessage } from "./api";
 
 const Reg = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    // const [redirect, setRedirect] = useState(false); 
     const handleClick = () => { 
         console.log("User loging in");
         SendMessage("User loging in");
         };
 
         
-    const submit = (e: SyntheticEvent) => {
+    const submit = async(e: SyntheticEvent) => {
         e.preventDefault();
 
-        console.log({
-            name,
-            email,
+        await fetch('http://localhost:8000/api/register', {
+        method : 'POST', 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            name, 
+            email, 
             password
         })
+       });  
+       
+      // setRedirect(true); 
     }
+    // wanted to redirect register to login page, but didnt work lol
+    //  if(redirect){
+    //     return <redirect to="/login"/>; 
+    //  }
+
     return (
         <form onSubmit = {submit}>
         <h1 className="text">Welcome to JAM. Sign in below</h1>
