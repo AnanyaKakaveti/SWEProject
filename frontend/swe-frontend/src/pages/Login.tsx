@@ -31,8 +31,12 @@ const Login = () => {
              onChange={e => setPassword(e.target.value)}
           />
        
-        <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        <p className="mt-5 mb-3 text-muted">&copy; 2023</p>
+          <button 
+            className="w-100 btn btn-lg btn-primary" 
+            type="submit">Sign in
+          </button>
+          <p className="mt-5 mb-3 text-muted">&copy; 2023</p>
+
       </form>
     );
 };
