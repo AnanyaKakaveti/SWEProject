@@ -10,10 +10,10 @@ const Nav = () => {
         <div>
           <ul className="navbar-nav me-auto mb-2 mb-md-0">
             <li className="nav-item active">
-              <Link to="/Login" className="nav-link" aria-current="page">Login</Link>
+              <Link to="/login" className="nav-link" aria-current="page">Login</Link>
             </li>
             <li className="nav-item active">
-              <Link to="/Register" className="nav-link">Register</Link>
+              <Link to="/register" className="nav-link">Register</Link>
             </li>
           </ul>
         </div>
