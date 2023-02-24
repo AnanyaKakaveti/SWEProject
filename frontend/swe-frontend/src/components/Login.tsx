@@ -10,7 +10,7 @@ const Login = () => {
   const submit = async (e:SyntheticEvent) =>{
     e.preventDefault();
 
-    await fetch('http://localhost:8000/api/login', {
+    const response = await fetch('http://localhost:8000/api/login', {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'}, 
             credentials : 'include',
@@ -19,6 +19,8 @@ const Login = () => {
                 password
             })
         });
+    const content = await response.json();
+    // props.setName(content.name);
     setRedirect(true);
   }
 

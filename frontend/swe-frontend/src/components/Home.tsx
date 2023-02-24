@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Typed from 'react-typed';
 
 
+
 const Home: React.FC = () => {
+
     return (
         <div>
           <div className="style">JAM.</div>  
