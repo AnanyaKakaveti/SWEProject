@@ -7,15 +7,18 @@ const Login = () => {
   const submit = async(e : SyntheticEvent) =>{
     e.preventDefault(); 
 
-    await fetch('http://localhost:8000/api/login', {
-      method : 'POST', 
+    const response = await fetch('http://localhost:8000/api/login', {
+      method: 'POST',
       headers: {'Content-Type': 'application/json'},
       credentials: 'include',
       body: JSON.stringify({
-          email, 
+          email,
           password
       })
-     }); 
+  });
+    const content = await response.json(); 
+    console.log(content)
+
   }
   
   return (

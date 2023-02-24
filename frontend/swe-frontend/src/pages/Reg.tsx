@@ -1,5 +1,4 @@
 import React, {SyntheticEvent, useState} from 'react'
-import { Connect, SendMessage } from "../api";
 import {Link} from "react-router-dom";
 // import Button from "react-bootstrap/Button";
 
@@ -10,19 +9,30 @@ const Reg = () => {
 
     const handleClick = () => { 
         console.log("User logging in");
-        SendMessage("User logging in");
              
     };
 
         
-    const submit = (e: SyntheticEvent) => {
+    const submit = async(e: SyntheticEvent) => {
         e.preventDefault();
 
-        console.log({
-            name,
-            email,
-            password
-        })
+        // console.log({
+        //     name,
+        //     email,
+        //     password
+        // })
+
+        const response = await fetch('http://localhost:8000/api/register', {
+            method: 'POST', 
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify({
+                name, 
+                email, 
+                password
+            })
+        }); 
+        // const content = await response.json(); 
+        // console.log(content)
     }
     return (
         <form onSubmit = {submit}>

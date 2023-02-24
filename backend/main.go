@@ -14,7 +14,7 @@ import (
 
 type User struct {
 	Id       uint
-	Name string
+	Name     string
 	Email    string
 	Password []byte
 }
