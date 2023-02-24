@@ -20,7 +20,7 @@ const Login = () => {
             })
         });
     const content = await response.json();
-    // props.setName(content.name);
+    console.log(content);
     setRedirect(true);
   }
 

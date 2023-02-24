@@ -1,35 +1,23 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Login from "./components/Login";
-import { Connect, SendMessage } from "./api";
+import Login from "./pages/Login";
 import Nav from "./components/nav";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Reg from "./Reg";
-import Search from "./components/Search";
+import Reg from "./pages/Reg";
+import Search from "./pages/Search";
 
 
 function App(){
-        const [name, setName] = useState('');
 
-        // useEffect(() => {
-        //     (
-        //         async () => {
-        //             const reponse = await fetch('http://localhost:8000/api/user', {
-        //                 headers: {'Content-Type' : 'application/json'}, 
-        //                 credentials : 'include',
-        //             });
-    
-        //             const content = await reponse.json();
-        //             setName(content.name);
-        //         }
-        //     )();
-        // });
+useEffect(() => {
 
-// const handleClick = () => { 
-// console.log("User logging in");
-// SendMessage("User logging in");
-// };
+}, []);
+
+const handleClick = () => { 
+console.log("User loging in");
+
+};
 
 return(
      <div className="App">    

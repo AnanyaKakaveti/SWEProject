@@ -210,7 +210,7 @@ func Users(c *fiber.Ctx) error {
 
 	DB.Where("id = ?", claims.Issuer).First(&user)
 
-	return c.JSON(user)
+	return c.JSON(claims)
 }
 
 func Logout(c *fiber.Ctx) error {

@@ -1,6 +1,6 @@
 import React, {SyntheticEvent, useState} from 'react'
 import { Navigate } from 'react-router-dom';
-import { Connect, SendMessage } from "./api";
+// import { Connect, SendMessage } from "./api";
 
 const Reg = () => {
     const [name, setName] = useState('');
@@ -10,14 +10,14 @@ const Reg = () => {
 
     const handleClick = () => { 
         console.log("User loging in");
-        SendMessage("User loging in");
+        // SendMessage("User loging in");
         };
 
         
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        await fetch('http://localhost:8000/api/register', {
+        const response = await fetch('http://localhost:8000/api/register', {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'}, 
             body: JSON.stringify({
@@ -27,8 +27,8 @@ const Reg = () => {
             })
         });
 
-        // const content = await response.json();
-        // console.log(content);
+        const content = await response.json();
+        console.log(content);
 
 
         setRedirect(true);
