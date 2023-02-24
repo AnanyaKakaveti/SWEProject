@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Login from "./components/Login";
-import { Connect, SendMessage } from "./api";
+import Login from "./pages/Login";
 import Nav from "./components/nav";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Reg from "./Reg";
-import Search from "./components/Search";
+import Reg from "./pages/Reg";
+import Search from "./pages/Search";
 
 
 function App(){
 
 useEffect(() => {
-Connect();
+
 }, []);
 
 const handleClick = () => { 
 console.log("User loging in");
-SendMessage("User loging in");
+
 };
 
 return(
