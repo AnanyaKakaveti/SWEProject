@@ -1,14 +1,35 @@
-import react from 'react';
+import React, {useEffect, useState} from 'react';
 
 const Search = () => {
-    return (
+    const [name, setName] = useState('');
 
-    <form>
-        <h1 className="text" >Song picker</h1>
-        <input type="name" className="form-control" id="floatingInput" placeholder="Search song" required/>
+    useEffect(() => {
+        (
+            async () => {
+                const reponse = await fetch('http://localhost:8000/api/user', {
+                    headers: {'Content-Type' : 'application/json'}, 
+                    credentials : 'include',
+                });
 
-    </form>
-    );
+                const content = await reponse.json();
+                setName(content.name);
+                 console.log(content.name)
+
+            }
+        )();
+    });
+
+    return (
+
+    <form>
+        <h1 className="text" >Song picker</h1>
+        <input type="name" className="form-control" id="floatingInput" placeholder="Search song" required/>
+        <div>
+            { "Hi " + name }
+        </div>
+    </form>
+    
+    );
 };
 
 export default Search;
