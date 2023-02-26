@@ -1,6 +1,7 @@
 import react from 'react';
 import React, {SyntheticEvent, useState} from 'react';
 import { Navigate } from 'react-router-dom';
+import {Link} from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -39,8 +40,9 @@ const Login = () => {
         <input type="password" className="form-control" id="floatingPassword" placeholder="Password" required
             onChange = {e=>setPassword(e.target.value)}
           />
-       
+       <Link  to="/search">
         <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        </Link>
         <p className="mt-5 mb-3 text-muted">&copy; 2023</p>
       </form>
     );

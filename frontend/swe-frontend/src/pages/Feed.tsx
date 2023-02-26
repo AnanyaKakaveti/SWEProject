@@ -4,13 +4,7 @@ import {Link} from "react-router-dom";
 
 const Feed = () => {
     return (
-        <div className="feed">
-        {/* <div>
-
-        <p className="text" > Here is what your followers want you to listen to</p>
-        </div> */}
-        
-    
+     <div className="feed">    
 <section className="py-5 text-center container">
   <div className="row py-lg-5">
     <div className="col-lg-6 col-md-8 mx-auto">
