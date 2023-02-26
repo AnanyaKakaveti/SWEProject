@@ -1,6 +1,7 @@
 import React, {SyntheticEvent, useState} from 'react'
 import { Navigate } from 'react-router-dom';
-// import { Connect, SendMessage } from "./api";
+import {Link} from "react-router-dom";
+ //import { Connect, SendMessage } from "./api";
 
 const Reg = () => {
     const [name, setName] = useState('');
@@ -10,6 +11,7 @@ const Reg = () => {
 
     const handleClick = () => { 
         console.log("User loging in");
+       
         // SendMessage("User loging in");
         };
 
@@ -50,8 +52,9 @@ const Reg = () => {
        
           <input type="password" className="form-control" id="floatingPassword" placeholder="Password" required
             onChange = {e => setPassword(e.target.value)}/>
-               
-        <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleClick}>Sign in</button>
+ <Link to="/search">
+        <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleClick}>Sign in </button>
+        </Link>
         <p className="mt-5 mb-3 text-muted">&copy; 2023</p>
       </form>
     );
