@@ -34,8 +34,8 @@ return(
             <Route path="/search" element={<Search/>} />
             <Route path="/feed" element={<Feed/>} />
         </Routes>  
-        <Footer/>
         </main>
+        <Footer/>
     </BrowserRouter>
     {/* <button onClick={handleClick}>Hit</button> */}
         </div>
