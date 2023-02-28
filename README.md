@@ -24,7 +24,7 @@ Websocket and Backend: https://tutorialedge.net/projects/chat-system-in-go-and-r
 Bootstrap: https://getbootstrap.com/docs/5.3/examples/
 
 Cypress: 
-to install: npm install cypress --save-dev // sometimes you have to do npm install cypress --force
+to install: npm install cypress --save-dev // if it doesn't work do: npm install cypress --force
 to use: npx cypress open
 
 

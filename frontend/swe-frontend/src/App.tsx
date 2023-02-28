@@ -7,6 +7,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Reg from "./pages/Reg";
 import Feed from "./pages/Feed";
 import Search from "./pages/Search";
+import Footer from "./components/Footer";
 
 
 function App(){
@@ -33,6 +34,7 @@ return(
             <Route path="/search" element={<Search/>} />
             <Route path="/feed" element={<Feed/>} />
         </Routes>  
+        <Footer/>
         </main>
     </BrowserRouter>
     {/* <button onClick={handleClick}>Hit</button> */}
