@@ -94,7 +94,7 @@ var DB *gorm.DB
 func Connect() {
 	var err error
 
-	connection, err := gorm.Open(mysql.Open("sqluser:password@/loginpage"), &gorm.Config{})
+	connection, err := gorm.Open(mysql.Open("sqluser:password@/myloginpage"), &gorm.Config{})
 
 	if err != nil {
 		panic("could not connect to the database")
@@ -210,7 +210,7 @@ func Users(c *fiber.Ctx) error {
 
 	DB.Where("id = ?", claims.Issuer).First(&user)
 
-	return c.JSON(claims)
+	return c.JSON(user)
 }
 
 func Logout(c *fiber.Ctx) error {
