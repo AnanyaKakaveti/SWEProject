@@ -40,7 +40,6 @@ interface LoginProps {
   return (
 
     <form onSubmit = {submit}>
-      <div className="test">
         <h1 className="text">Welcome to JAM. Sign in below</h1>
 
         <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" required
@@ -50,14 +49,13 @@ interface LoginProps {
         <input type="password" className="form-control" id="floatingPassword" placeholder="Password" required
             onChange = {e=>setPassword(e.target.value)}
           />
-          {isVisible ? "Hide" : "Show"} Navigation Bar
+          {/* {isVisible ? "Hide" : "Show"} Navigation Bar */}
        <Link  to="/search">
         <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={() => setIsVisible(!isVisible)}>Sign in </button>
         </Link>
-        {isVisible && <Nav {...navProps} />}
+        {/* {isVisible && <Nav {...navProps} />} */}
         {/* <Nav {...navProps} isVisible={!isVisible} /> */}
         <p className="mt-5 mb-3 text-muted">&copy; 2023</p>
-        </div>
       </form>
     );
 };

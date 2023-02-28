@@ -7,7 +7,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Reg from "./pages/Reg";
 import Feed from "./pages/Feed";
 import Search from "./pages/Search";
-
+import Footer from "./components/Footer";
 
 interface AppProps{
 
@@ -43,7 +43,7 @@ return(
             <Route path="/search" element={<Search/>} />
             <Route path="/feed" element={<Feed/>} />
         </Routes>  
-        
+        {/* <Footer/> */}
         </main>
   
     </BrowserRouter>

@@ -77,8 +77,8 @@ const submit = (e: SyntheticEvent) => {
             {name ? "Hi " + name : "You are not logged in"}
         </div>
         <Link to="/feed">
-//             <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleClick}>submit song</button>
-//         </Link>  
+             <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleClick}>submit song</button>
+         </Link>  
     </form>
     
      );

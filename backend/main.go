@@ -206,7 +206,7 @@ func Users(c *fiber.Ctx) error {
 
 	DB.Where("id = ?", claims.Issuer).First(&user)
 
-	return c.JSON(claims)
+	return c.JSON(user)
 }
 
 func Logout(c *fiber.Ctx) error {
