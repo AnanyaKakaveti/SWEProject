@@ -73,7 +73,7 @@ const submit = (e: SyntheticEvent) => {
     <form>
         <h1 className="text" >Song picker</h1>
         <input type="name" className="form-control" id="floatingInput" placeholder="Search song" required/>
-        <div>
+        <div className = "artists">
             {name ? "Hi " + name : "You are not logged in"}
         </div>
         <Link to="/feed">
