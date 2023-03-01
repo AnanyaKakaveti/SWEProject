@@ -7,6 +7,7 @@
 }
 
 body {
+  background: white;
   height: 100vh;
   width: 100vw;
 }
@@ -20,6 +21,10 @@ body {
 .slogan{
   color: white;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+.feedBackground{
+  background-color: blue;
 
 }
 
@@ -95,3 +100,27 @@ body {
 .checkbox{
   color: white;
 }
+.fw-light{
+  color: white;
+}
+.lead{
+  color: rgb(139, 2, 219);
+  font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.feed{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color:black; 
+  left: 0;
+  
+}
+
+.container-fluid{
+  background-color: black;
+}
+.card-img-top{
+  background-image: url(musicWave.jpeg);
+}
+
