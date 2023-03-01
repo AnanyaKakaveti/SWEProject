@@ -11,11 +11,19 @@ const Footer = () => {
     <div className="footer">
         <div className="socialMedia">
             <LinkedInIcon onClick={() => window.open('https://www.linkedin.com/in/ananya-kakaveti-961897221/')}/>
+<<<<<<< HEAD
             <GitHubIcon onClick={() => window.open('https://github.com/ananyakakaveti')}/>
             {/* <EmailIcon onClick={() => window.location = 'mailto:annniek19@gmail.com'}/> */}
     
         </div>
         <p> &copy; 2023 annieisthebest.com</p>
+=======
+            <GitHubIcon onClick={() => window.open('https://github.com/AnanyaKakaveti/SWEProject')}/>
+            {/* <EmailIcon onClick={() => window.location = 'mailto:annniek19@gmail.com'}/> */}
+    
+        </div>
+        <p> &copy; 2023 Jam.com</p>
+>>>>>>> cypress
     </div>
   )
 }

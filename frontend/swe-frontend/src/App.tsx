@@ -45,7 +45,11 @@ return(
         </Routes>  
         {/* <Footer/> */}
         </main>
+<<<<<<< HEAD
   
+=======
+        <Footer/>
+>>>>>>> cypress
     </BrowserRouter>
     {/* <button onClick={handleClick}>Hit</button> */}
         </div>
