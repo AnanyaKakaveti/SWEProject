@@ -2,9 +2,17 @@ import react from 'react';
 import React, {SyntheticEvent, useState} from 'react';
 import { Navigate } from 'react-router-dom';
 import {Link} from "react-router-dom";
+import Nav , { NavProps }  from "../components/nav";
 
-const Login = () => {
+
+interface LoginProps {
+  navProps: NavProps; // Pass NavProps down to Nav component
+}
+
+//const Login = () => {
+  const Login: React.FC<LoginProps> = ({ navProps }) =>{
   const [email, setEmail] = useState('');
+  const [isVisible, setIsVisible] = useState(true);
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
 
@@ -28,6 +36,7 @@ const Login = () => {
   if(redirect)
   return <Navigate to= "/search"/>;
   
+
   return (
 
     <form onSubmit = {submit}>
@@ -40,12 +49,16 @@ const Login = () => {
         <input type="password" className="form-control" id="floatingPassword" placeholder="Password" required
             onChange = {e=>setPassword(e.target.value)}
           />
+          {/* {isVisible ? "Hide" : "Show"} Navigation Bar */}
        <Link  to="/search">
-        <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={() => setIsVisible(!isVisible)}>Sign in </button>
         </Link>
+        {/* {isVisible && <Nav {...navProps} />} */}
+        {/* <Nav {...navProps} isVisible={!isVisible} /> */}
         <p className="mt-5 mb-3 text-muted">&copy; 2023</p>
       </form>
     );
 };
 
 export default Login;
+

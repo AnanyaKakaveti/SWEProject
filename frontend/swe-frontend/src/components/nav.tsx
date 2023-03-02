@@ -1,8 +1,14 @@
 import react from 'react';
+import React, {useState} from 'react';
+
 import {Link} from "react-router-dom";
 // let menu;
 
-const Nav = () => {
+export interface NavProps {
+  isVisible: boolean;
+}
+
+const Nav: React.FC<NavProps> = ({ isVisible }) => {
   // props:{name: string, setName: (name:string) => void}
   
   // const logout = async () => {
@@ -37,6 +43,7 @@ const Nav = () => {
   //   )
   // }
 
+
     return (
 <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
       <div className="container-fluid">
@@ -48,7 +55,8 @@ const Nav = () => {
               <Link to="/login" className="nav-link" aria-current="page">Login</Link>
             </li>
             <li className="nav-item active">
-              <Link to="/Register" className="nav-link">Register</Link>
+              <Link to="/Register" className="nav-link" >Register</Link>
+           
             </li>
       </ul>
         </div>
