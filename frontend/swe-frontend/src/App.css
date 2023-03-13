@@ -75,18 +75,19 @@ body {
   color: white;
 }
 
-
+.cards {
+  min-width: 20% !important;
+  max-width: none !important;
+  min-height: 50px;
+  width: 100;
+  color: pink;
+}
 
 .form-signin {
   max-width: 330px;
   padding: 15px;
 
 }
-.cards {
-  max-width: none !important;
-  color: pink;
-}
-.foo{ max-width:none; }
 
 .form-signin .form-floating:focus-within {
   z-index: 2;
