@@ -75,12 +75,29 @@ body {
   color: white;
 }
 
+.searchResults {
+  position: absolute;
+        left: 0;
+        right: 0;
+        height: 20;
+        top: 300px;  
+        bottom: 50px;
+  overflow-y: scroll;
+  height: 70%;
+  background-color: black;
+}
+
 .cards {
-  min-width: 20% !important;
-  max-width: none !important;
-  min-height: 50px;
-  width: 100;
-  color: pink;
+  /* idk why the max-width won't work, it has something to do with the code underneath this in form-sign-in */
+  position: absolute;
+        left: 0;
+        right: 0;
+        height: 20;
+        top: 0;   
+
+  align-items: center;
+  justify-content: center;
+  color: black;
 }
 
 .form-signin {

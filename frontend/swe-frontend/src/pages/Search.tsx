@@ -77,7 +77,7 @@ const [song, setSong] = useState('');
 
     const [searchInput, setSearchInput] = useState("");
     const [accessToken, setAccessToken] = useState("");
-    const [albums, setAlbums] = useState([]);
+    const [albums, setAlbums] = useState<any[]>([]);
 
     useEffect(() => {
         var authParameters = {
@@ -149,6 +149,7 @@ const [song, setSong] = useState('');
                 <Button onClick ={search}>Search</Button>
             </InputGroup>
         </Container>
+        <div className='searchResults'>   
         <Container className= "cards">
             <Row className="mx-2 row row-cols-4">
                 {albums.map( (album, i) => {
@@ -164,13 +165,14 @@ const [song, setSong] = useState('');
                 })}
             </Row>
         </Container>
+        </div>
         
         
         
 
-        {/* <Link to="/feed">
+        <Link to="/feed">
              <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleClick}>submit song</button>
-         </Link>   */}
+         </Link>  
     </div>
     
      );
