@@ -75,11 +75,18 @@ body {
   color: white;
 }
 
+
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
 
 }
+.cards {
+  max-width: none !important;
+  color: pink;
+}
+.foo{ max-width:none; }
 
 .form-signin .form-floating:focus-within {
   z-index: 2;
@@ -132,3 +139,5 @@ body {
   background-color: rgb(64, 12, 169);
   border-color: rgb(23, 10, 43);
 }
+
+
