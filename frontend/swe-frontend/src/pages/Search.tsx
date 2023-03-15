@@ -111,14 +111,15 @@ const [song, setSong] = useState('');
         console.log("Artist ID is " + artistID);   
 
         // Get request with Artist ID to grab all the albums from that artist
-        // do include_groups=album,single for individ songs as well
-        var returnedAlbums = await fetch('https://api.spotify.com/v1/artists/' + artistID + '/albums' + '?include_groups=album&market=US&limit=50', searchParameters)
+        // do include_groups=album,single for individual songs as well
+        var returnedAlbums = await fetch('https://api.spotify.com/v1/artists/' + artistID + '/albums' + '?include_groups=album,single&market=US&limit=50&include_external=audio', searchParameters)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
                 setAlbums(data.items);
             });
         // Display those albums to the user
+        
     }
 
 
@@ -144,7 +145,11 @@ const [song, setSong] = useState('');
                             search();
                         }
                     }}
-                    onChange={event =>setSearchInput(event.target.value)}
+                    onChange={event => {
+                        setSearchInput(event.target.value);
+                        search();
+                    }
+                    }
                     />
                 <Button onClick ={search}>Search</Button>
             </InputGroup>
@@ -157,8 +162,9 @@ const [song, setSong] = useState('');
                     return (
                         <Card>
                             <Card.Img src={album.images[0].url} />
-                            <Card.Body>
-                                <Card.Title>{album.name}</Card.Title>
+                            <Card.Body className = "mx-0">
+                                <Card.Title className= "font-size: 50"><h6>{album.name}</h6></Card.Title>
+                                <Card.Text>{album.artists[0].name}</Card.Text>
                             </Card.Body>
                         </Card>
                     )
