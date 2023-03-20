@@ -73,6 +73,7 @@ body {
 
 .text{
   color: white;
+  white-space: nowrap;
 }
 
 .searchResults {
@@ -80,11 +81,13 @@ body {
         left: 0;
         right: 0;
         height: 20;
-        top: 300px;  
+        top: 325px;  
         bottom: 50px;
   overflow-y: scroll;
   height: 70%;
   background-color: black;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 .cards {
@@ -98,6 +101,7 @@ body {
   align-items: center;
   justify-content: center;
   color: black;
+  margin-left: 10px;
 }
 
 .form-signin {

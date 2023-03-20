@@ -49,18 +49,11 @@ const Search = () => {
     const handleClick = () => { 
     console.log("present following feed");
 };
-const [song, setSong] = useState('');
 
-// const submit = (e: SyntheticEvent) => {
-//     e.preventDefault();
-
-//     console.log({
-//        song
-//     })
-// }
 
 
 // this is the stuff that chandini and anisha did, but it conflicts with calling an api
+
     // useEffect(() => {
     //     (
     //         async () => {
@@ -74,6 +67,8 @@ const [song, setSong] = useState('');
     //         }
     //     )();
     // });
+
+
 
     const [searchInput, setSearchInput] = useState("");
     const [accessToken, setAccessToken] = useState("");
@@ -104,6 +99,12 @@ const [song, setSong] = useState('');
                 'Authorization': 'Bearer ' + accessToken
             }
         }
+
+        
+
+        // for albums
+        
+        /*
         var artistID = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', searchParameters)
             .then(response => response.json())
             .then(data => { return data.artists.items[0].id})
@@ -118,8 +119,17 @@ const [song, setSong] = useState('');
                 console.log(data);
                 setAlbums(data.items);
             });
-        // Display those albums to the user
-        
+            */
+            
+
+        // searches for songs, as well as artist secondhandedly   
+        var trackID = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=track&market=US&limit=48&include_external=audio', searchParameters)
+            .then(response => response.json())
+            .then(data => { 
+                console.log(data);
+                setAlbums(data.tracks.items);
+                // return data.tracks.items[0].id
+            })
     }
 
 
@@ -128,7 +138,7 @@ const [song, setSong] = useState('');
     return (
 
     <div>
-        <h1 className="text" >Song picker</h1>
+        <h1 className="text" >Daily Song Picker</h1>
 
         {/* <input type="name" className="form-control" id="floatingInput" placeholder="Search song" required/> */}
         <div>
@@ -147,24 +157,28 @@ const [song, setSong] = useState('');
                     }}
                     onChange={event => {
                         setSearchInput(event.target.value);
+                        console.log('input: ' + searchInput);
                         search();
                     }
                     }
                     />
                 <Button onClick ={search}>Search</Button>
             </InputGroup>
+            <Link to="/feed">
+             <button className="w-100 btn btn-lg btn-primary my-2" type="submit" onClick={handleClick}>Submit Song/Go to Feed</button>
+         </Link>  
         </Container>
         <div className='searchResults'>   
         <Container className= "cards">
-            <Row className="mx-2 row row-cols-4">
-                {albums.map( (album, i) => {
-                    console.log(album);
+            <Row className="mx-1 row gx-0 row-cols-6 my-5">
+                {albums.map( (song, i) => {
+                    console.log('song: ' + song);
                     return (
                         <Card>
-                            <Card.Img src={album.images[0].url} />
+                            <Card.Img src={song.album.images[0].url} />
                             <Card.Body className = "mx-0">
-                                <Card.Title className= "font-size: 50"><h6>{album.name}</h6></Card.Title>
-                                <Card.Text>{album.artists[0].name}</Card.Text>
+                                <Card.Title className= "gx-1"><h6>{song.name}</h6></Card.Title>
+                                <Card.Text className = "gx-5">{song.artists[0].name}</Card.Text>
                             </Card.Body>
                         </Card>
                     )
@@ -176,9 +190,7 @@ const [song, setSong] = useState('');
         
         
 
-        <Link to="/feed">
-             <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleClick}>submit song</button>
-         </Link>  
+        
     </div>
     
      );
