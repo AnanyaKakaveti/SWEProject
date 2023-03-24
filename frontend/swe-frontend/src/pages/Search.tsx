@@ -75,6 +75,17 @@ const Search = () => {
     const [albums, setAlbums] = useState<any[]>([]);
 
     useEffect(() => {
+        (
+            async () => {
+                const reponse = await fetch('http://localhost:8000/api/user', {
+                    headers: {'Content-Type' : 'application/json'}, 
+                    credentials : 'include',
+                });
+        
+                const content = await reponse.json();
+                setName(content.name);
+                } )();
+                
         var authParameters = {
             method: 'POST',
             headers: {
