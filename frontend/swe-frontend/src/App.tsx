@@ -13,20 +13,20 @@ import Footer from "./components/Footer";
 interface AppProps{
 
 }
-//function App(){
-  const App: React.FC<AppProps> = () => {
+function App(){
+// const App: React.FC<AppProps> = () => {
 useEffect(() => {
 
 }, []);
 
 const handleClick = () => { 
-console.log("User loging in");
+console.log("User logging in");
 };
 
-const navProps = {
-  // set the properties of the navProps object here
-  isVisible: false
-};
+// const navProps = {
+//   // set the properties of the navProps object here
+//   isVisible: false
+// };
 
 
 
@@ -34,7 +34,7 @@ const navProps = {
 return(
      <div className="App">    
         <BrowserRouter>
-        <Nav {...navProps}  />
+        <Nav/>
 
         {/* name = {name} setName = {setName} */}
         

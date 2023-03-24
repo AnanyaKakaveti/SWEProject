@@ -52,9 +52,9 @@ const Reg = () => {
        
           <input type="password" className="form-control" id="floatingPassword" placeholder="Password" required
             onChange = {e => setPassword(e.target.value)}/>
- <Link to="/login">
+ {/* <Link to="/login"> */}
         <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleClick}>Sign in </button>
-        </Link>
+        {/* </Link> */}
         <p className="mt-5 mb-3 text-muted">&copy; 2023</p>
       </form>
     );

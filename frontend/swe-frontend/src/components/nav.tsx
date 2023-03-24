@@ -8,7 +8,8 @@ export interface NavProps {
   isVisible: boolean;
 }
 
-const Nav: React.FC<NavProps> = ({ isVisible }) => {
+const Nav = () => {
+// React.FC<NavProps> = ({ isVisible }) 
   // props:{name: string, setName: (name:string) => void}
   
   // const logout = async () => {
