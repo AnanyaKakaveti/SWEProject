@@ -73,6 +73,35 @@ body {
 
 .text{
   color: white;
+  white-space: nowrap;
+}
+
+.searchResults {
+  position: absolute;
+        left: 0;
+        right: 0;
+        height: 20;
+        top: 325px;  
+        bottom: 50px;
+  overflow-y: scroll;
+  height: 70%;
+  background-color: black;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.cards {
+  /* idk why the max-width won't work, it has something to do with the code underneath this in form-sign-in */
+  position: absolute;
+        left: 0;
+        right: 0;
+        height: 20;
+        top: 0;   
+
+  align-items: center;
+  justify-content: center;
+  color: black;
+  margin-left: 10px;
 }
 
 .form-signin {
@@ -124,18 +153,13 @@ body {
   background-image: url(musicWave.jpeg);
 }
 
-.test{
-  background-color: blue;
-  width: 100%;
-  height: 100%;
+.btn-primary {
+  background-color: rgb(100, 24, 200);
+  border-color: black;
 }
-
-.btn-primary{
- background-color:rgb(139, 2, 219);
-  border-color: rgb(139, 2, 219);
-}
-
-.btn-primary:hover{
+.btn-primary:hover {
   background-color: rgb(64, 12, 169);
   border-color: rgb(23, 10, 43);
 }
+
+

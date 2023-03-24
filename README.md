@@ -23,6 +23,11 @@ Login page: https://www.youtube.com/watch?v=d4Y2DkKbxM0
 Websocket and Backend: https://tutorialedge.net/projects/chat-system-in-go-and-react/part-4-handling-multiple-clients/
 Bootstrap: https://getbootstrap.com/docs/5.3/examples/
 
+Cypress: 
+to install: npm install cypress --save-dev // if it doesn't work do: npm install cypress --force
+to use: npx cypress open
+
+
 SQL Database Installation: 
 download MySQL Community Server, MySQL Workbench ** Remember password you created during installation, will need later**
 
