@@ -41,7 +41,7 @@ return(
         <main className="form-signin w-100 m-auto">
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login navProps={navProps} />} />
+            <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Reg/>} />
             <Route path="/search" element={<Search/>} />
             <Route path="/feed" element={<Feed/>} />
