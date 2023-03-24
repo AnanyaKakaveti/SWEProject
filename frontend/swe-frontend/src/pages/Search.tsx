@@ -54,19 +54,19 @@ const Search = () => {
 
 // this is the stuff that chandini and anisha did, but it conflicts with calling an api
 
-    // useEffect(() => {
-    //     (
-    //         async () => {
-    //             const reponse = await fetch('http://localhost:8000/api/user', {
-    //                 headers: {'Content-Type' : 'application/json'}, 
-    //                 credentials : 'include',
-    //             });
+    useEffect(() => {
+        (
+            async () => {
+                const reponse = await fetch('http://localhost:8000/api/user', {
+                    headers: {'Content-Type' : 'application/json'}, 
+                    credentials : 'include',
+                });
 
-    //             const content = await reponse.json();
-    //             setName(content.name);
-    //         }
-    //     )();
-    // });
+                const content = await reponse.json();
+                setName(content.name);
+            }
+        )();
+    });
 
 
 
