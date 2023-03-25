@@ -29,12 +29,13 @@ const navProps = {
 };
 
 
-
+const [nameState, setNameState] = useState('');
 
 return(
+  
      <div className="App">    
         <BrowserRouter>
-        <Nav {...navProps}  />
+        <Nav nameState={nameState} />
 
         {/* name = {name} setName = {setName} */}
         
@@ -43,7 +44,7 @@ return(
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Reg/>} />
-            <Route path="/search" element={<Search/>} />
+            <Route path="/search" element={<Search setNameState={setNameState}/>} />
             <Route path="/feed" element={<Feed/>} />
         </Routes>  
         {/* <Footer/> */}
