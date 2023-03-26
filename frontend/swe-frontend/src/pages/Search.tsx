@@ -1,35 +1,4 @@
 
-// import React, {SyntheticEvent, useState} from 'react'
-// import {Link} from "react-router-dom";
-
-
-// const Search = () => {
-
-//     const [song, setSong] = useState('');
-
-// const handleClick = () => { 
-//     console.log("present following feed");
-// };
-
-// const submit = (e: SyntheticEvent) => {
-//     e.preventDefault();
-
-//     console.log({
-//        song
-//     })
-// }
-
-//     return (
-
-//     <form onSubmit = {submit}>
-//         <h1 className="text" >Search for your song of the day</h1>
-//         <input type="song" className="form-control" id="floatingInput" placeholder="Search song" required/>
-
-//         <Link to="/feed">
-//             <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleClick}>submit song</button>
-//         </Link>  
-
-//     </form>
 
     
 
@@ -38,20 +7,39 @@ import React, { useEffect, SyntheticEvent, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Form, InputGroup, FormControl, Button, Row, Card} from 'react-bootstrap';
 import {Link} from "react-router-dom";
+import e from 'express';
 
 const CLIENT_ID = "d2db8ba7df624158987b5068d737afd7";
 const CLIENT_SECRET = "3a1c96cb492f4750aa714c23b587e5b6";
-
+var randomID = "2aPTvyE09vUCRwVvj0I8WK";
 
 const Search = () => {
     const [name, setName] = useState('');
+    const [songID, setsongID] = useState(''); 
 
     const handleClick = () => { 
     console.log("present following feed");
 };
+// function to add songID to DB t
+const submit = async (event:SyntheticEvent) =>{
+    event.preventDefault();
+
+    const response = await fetch('http://localhost:8000/api/register', {
+        method: 'POST',
+        headers: {'Content-Type' : 'application/json'}, 
+        body: JSON.stringify({
+            songID
+        })
+    })
+    const content = await response.json();
+    console.log(content);
+    //setsongID(content.randomID);
+
+}
 
 
 
+// fixed this is now with the frontened code! 
 // this is the stuff that chandini and anisha did, but it conflicts with calling an api
 
     // useEffect(() => {
@@ -74,6 +62,8 @@ const Search = () => {
     const [accessToken, setAccessToken] = useState("");
     const [albums, setAlbums] = useState<any[]>([]);
 
+    
+  
     useEffect(() => {
         (
             async () => {
@@ -143,11 +133,11 @@ const Search = () => {
             })
     }
 
-
+    // random soing: Sundress by ASAP 
 
     console.log(albums);
     return (
-
+        <form onSubmit = {submit}>
     <div>
         <h1 className="text" >Daily Song Picker</h1>
 
@@ -166,18 +156,24 @@ const Search = () => {
                             search();
                         }
                     }}
-                    onChange={event => {
-                        setSearchInput(event.target.value);
+                    onChange={e => {
+                        setSearchInput(e.target.value);
+                        setsongID(e.target.value); 
+                        console.log('song: ' + e.target.value); 
                         console.log('input: ' + searchInput);
                         search();
                     }
                     }
+                    
                     />
                 <Button onClick ={search}>Search</Button>
             </InputGroup>
+            
             <Link to="/feed">
-             <button className="w-100 btn btn-lg btn-primary my-2" type="submit" onClick={handleClick}>Submit Song/Go to Feed</button>
+             <button className="w-100 btn btn-lg btn-primary my-2" type="submit" onClick={handleClick}>Submit Song/Go to Feed
+             </button>
          </Link>  
+         
         </Container>
         <div className='searchResults'>   
         <Container className= "cards">
@@ -203,8 +199,10 @@ const Search = () => {
 
         
     </div>
-    
+    </form>
      );
+     
  };
+
 
 export default Search;

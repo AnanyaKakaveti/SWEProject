@@ -75,10 +75,13 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 }
 
 type User struct {
-	Id       uint   `json: "id"`
-	Name     string `json:"name"`
-	Email    string `json: "email" gorm: "unique"`
-	Password []byte `json: "-"`
+	Id          uint   `json: "id"`
+	Name        string `json:"name"`
+	Email       string `json: "email" gorm: "unique"`
+	Password    []byte `json: "-"`
+	CurrentSong string `json: "song"`
+	// CurrentSong string   `json: "current song"`
+	// Songs       []string `json: "all songs"`
 }
 
 func setupRoutes() {
@@ -102,7 +105,10 @@ func Connect() {
 
 	DB = connection
 
-	connection.AutoMigrate(&User{})
+	connection.AutoMigrate(
+		User{},
+	)
+
 }
 
 func Register(c *fiber.Ctx) error {
@@ -115,9 +121,10 @@ func Register(c *fiber.Ctx) error {
 	password, _ := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
 
 	user := User{
-		Name:     data["name"],
-		Email:    data["email"],
-		Password: password,
+		Name:        data["name"],
+		Email:       data["email"],
+		Password:    password,
+		CurrentSong: data["song"],
 	}
 
 	DB.Create(&user)
@@ -126,6 +133,28 @@ func Register(c *fiber.Ctx) error {
 
 	//return c.SendString("Hello, World 👋!")
 }
+
+// this func is not necessary
+// func Search(c *fiber.Ctx) error {
+// 	var data map[string]string
+
+// 	if err := c.BodyParser(&data); err != nil {
+// 		return err
+// 	}
+
+// 	password, _ := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
+
+// 	user := User{
+// 		Name:        data["name"],
+// 		Email:       data["email"],
+// 		Password:    password,
+// 		CurrentSong: data["song"],
+// 	}
+
+// 	DB.Create(&user)
+
+// 	return c.JSON(user)
+// }
 
 const SecretKey = "secret"
 
@@ -224,10 +253,17 @@ func Logout(c *fiber.Ctx) error {
 
 }
 
+// posts song
+// func CreatePost(c *fiber.Ctx) error{
+// 	var songpost models.Post
+
+// }
+
 func Setup(app *fiber.App) {
 	app.Post("/api/register", Register)
 	app.Post("/api/login", Login)
 	app.Get("/api/user", Users)
+	//app.Post("/api/search", Search)
 	app.Post("/api/logout", Logout)
 }
 
