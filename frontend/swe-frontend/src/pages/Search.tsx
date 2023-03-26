@@ -7,9 +7,11 @@ import {Link} from "react-router-dom";
 const CLIENT_ID = "d2db8ba7df624158987b5068d737afd7";
 const CLIENT_SECRET = "3a1c96cb492f4750aa714c23b587e5b6";
 
+interface Props {
+    setNameState: (param: string) => void
+  }
 
-
-const Search = ({setNameState}) => {
+export const Search = ({}) => {
     const [name, setName] = useState('');
 `   `
     const handleClick = () => { 
@@ -30,7 +32,7 @@ const Search = ({setNameState}) => {
         
                 const content = await reponse.json();
                 setName(content.name);
-                setNameState(name);
+                // setNameState(name);
                 console.log(name);
                 // console.log(content.name);
             } )();

@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Reg from "./pages/Reg";
 import Feed from "./pages/Feed";
+import Logout from "./pages/Logout";
 import Search from "./pages/Search";
 import Footer from "./components/Footer";
 
@@ -44,7 +45,9 @@ return(
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Reg/>} />
-            <Route path="/search" element={<Search setNameState={setNameState}/>} />
+            {/* <Route path="/search" element={<Search setNameState={setNameState}/>} /> */}
+            <Route path="/logout" element={<Logout/>} />
+            <Route path="/search" element={<Search/>} />
             <Route path="/feed" element={<Feed/>} />
         </Routes>  
         {/* <Footer/> */}
