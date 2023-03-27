@@ -29,7 +29,11 @@ const Logout = () => {
         <div className = "w-100">
           <h1 className="text">Are you sure you want to logout?</h1>
           <Link to="/Login">
-            <button className="w-100 btn btn-lg btn-primary my-1" type="submit">Yes</button>
+            <button className="w-100 btn btn-lg btn-primary my-1" 
+            type="submit"
+            onClick={event => {
+              setName (""); // deleting the cookie would happen here!!
+          }}>Yes</button>
           </Link>
           <Link to= "/">
             <button className="w-100 btn btn-lg btn-primary" type="submit">No</button>
