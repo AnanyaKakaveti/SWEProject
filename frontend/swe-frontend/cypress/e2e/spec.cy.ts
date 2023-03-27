@@ -37,7 +37,8 @@ describe('Visit feed page', () => {
     cy.visit('http://localhost:3000/')
     cy.contains('Login').click()
     cy.get("button").click()
-    cy.contains('submit song').click()
+    cy.contains('Submit Song/Go to Feed').click()
     cy.contains('Wondering what your friends are listening to? Look no further')
   })
 })
+

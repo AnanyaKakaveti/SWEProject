@@ -15,6 +15,8 @@ interface AppProps{
 }
 //function App(){
   const App: React.FC<AppProps> = () => {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 useEffect(() => {
 
 }, []);
@@ -34,14 +36,14 @@ const navProps = {
 return(
      <div className="App">    
         <BrowserRouter>
-        <Nav {...navProps}  />
+        <Nav{...navProps}  />
 
         {/* name = {name} setName = {setName} */}
         
         <main className="form-signin w-100 m-auto">
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login navProps={navProps} />} />
+            <Route path="/login" element={<Login navProps={navProps} />}/>
             <Route path="/register" element={<Reg/>} />
             <Route path="/search" element={<Search/>} />
             <Route path="/feed" element={<Feed/>} />
