@@ -74,6 +74,9 @@ body {
 .text{
   color: white;
   white-space: nowrap;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .searchResults {
