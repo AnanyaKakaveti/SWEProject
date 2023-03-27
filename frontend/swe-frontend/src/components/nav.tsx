@@ -7,10 +7,14 @@ interface NavProps {
   nameState: string;
 }
 
-const [name, setName] = useState('');
+interface NavProps2 {
+  name: string
+}
+
+
 
 const Nav: React.FC<NavProps> = ({nameState}) => {
-  
+  const [name, setName] = useState('');
 
   useEffect(() => { (
         async () => {
@@ -33,11 +37,8 @@ const Nav: React.FC<NavProps> = ({nameState}) => {
       <div className="container-fluid">
         <Link to ="/" className="navbar-brand">JAM.</Link>
         <div>
-          {/* {menu} */}
           <ul className="navbar-nav me-auto mb-2 mb-md-0">
-          <li className="nav-link">
-            {name ? <LoggedIn/> : <LoggedOut/>}
-            </li>
+            {name ? <LoggedIn name = {name}/> : <LoggedOut/>}
           </ul>
         </div>
       </div> 
@@ -49,26 +50,31 @@ export default Nav;
 
 const LoggedOut = () => {
   return (
-    <ul className="navbar-nav me-auto mb-2 mb-md-0">
-      <li className="nav-item active">
-          <Link to="/login" className="nav-link" aria-current="page">Login</Link>
-      </li>
-      <li className="nav-item active">
-          <Link to="/Register" className="nav-link" >Register</Link>
-      </li>
-    </ul>
+    
+      <ul className="navbar-nav me-auto mb-2 mb-md-0">
+        <li className="nav-item active">
+            <Link to="/login" className="nav-link" aria-current="page">Login</Link>
+        </li>
+        <li className="nav-item active">
+            <Link to="/Register" className="nav-link" >Register</Link>
+        </li>
+      </ul>
+    
   )
 }
 
-const LoggedIn = () => {
+const LoggedIn: React.FC <NavProps2> = ({name}) => {
   return (
-    <ul className="navbar-nav me-auto mb-2 mb-md-0">
-      <li className="nav-item active">
-          {"Welcome " + name + "!"}
-      </li>
-      <li className="nav-item active">
-          <Link to="/Logout" className="nav-link" >Logout</Link>
-      </li>
-    </ul>
+    
+    <li className="nav-link">
+      <ul className="navbar-nav me-auto mb-2 mb-md-0">
+        <li className="nav-item active">
+            {"Welcome " + name + "!"}
+        </li>
+        <li className="nav-item active">
+            <Link to="/Logout" className="nav-link" >Logout</Link>
+        </li>
+      </ul>
+    </li>
   )
 }
