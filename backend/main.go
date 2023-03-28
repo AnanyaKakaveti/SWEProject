@@ -79,6 +79,7 @@ type User struct {
 	Name 		string `json:"name"`
 	Email 		string `json: "email" gorm: "unique"`
 	Password 	[]byte `json: "-"`
+	Song		string `json: "song"`
 }
 
 func setupRoutes() {
@@ -120,10 +121,27 @@ func Register(c *fiber.Ctx) error {
 		Name: 		data["name"],
 		Email: 		data["email"],
 		Password: 	password,
+		Song: 		data["song"],
 	}
 	
 
 	DB.Create(&user)
+	
+	return c.JSON(user)
+
+	//return c.SendString("Hello, World 👋!")
+}
+
+func Song(c *fiber.Ctx) error {
+	var data map[string]string
+
+	if err :=c.BodyParser(&data); err !=nil {
+		return err
+	}
+	
+	var user User
+	DB.Where("email = ?", data["email"]).First(&user)
+	DB.Set(user.Song, "random")
 	
 	return c.JSON(user)
 
@@ -228,12 +246,25 @@ func Logout(c *fiber.Ctx) error {
 
 }
 
+// func Song(c *fiber.Ctx) error {
+// 	var data map[string]string
+
+// 	var user User 
+
+// 	DB.Where("song = ?", data["song"]).First(&user)
+
+
+
+
+// }
+
 
 func Setup(app *fiber.App) {
 	app.Post("/api/register", Register)
 	app.Post("/api/login", Login)
 	app.Get("/api/user" , Users)
 	app.Post("/api/logout", Logout)
+	// app.Post("/api/song" , Song)
 }
 
 

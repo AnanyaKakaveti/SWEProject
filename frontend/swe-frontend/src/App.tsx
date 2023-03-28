@@ -46,7 +46,7 @@ return(
             <Route path="/search" element={<Search/>} />
             <Route path="/feed" element={<Feed/>} />
         </Routes>  
-        {/* <Footer/> */}
+        <Footer/>
         </main>
         <Footer/>
     </BrowserRouter>

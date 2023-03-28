@@ -1,39 +1,3 @@
-
-// import React, {SyntheticEvent, useState} from 'react'
-// import {Link} from "react-router-dom";
-
-
-// const Search = () => {
-
-//     const [song, setSong] = useState('');
-
-// const handleClick = () => { 
-//     console.log("present following feed");
-// };
-
-// const submit = (e: SyntheticEvent) => {
-//     e.preventDefault();
-
-//     console.log({
-//        song
-//     })
-// }
-
-//     return (
-
-//     <form onSubmit = {submit}>
-//         <h1 className="text" >Search for your song of the day</h1>
-//         <input type="song" className="form-control" id="floatingInput" placeholder="Search song" required/>
-
-//         <Link to="/feed">
-//             <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleClick}>submit song</button>
-//         </Link>  
-
-//     </form>
-
-    
-
-
 import React, { useEffect, SyntheticEvent, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Form, InputGroup, FormControl, Button, Row, Card} from 'react-bootstrap';
@@ -41,19 +5,43 @@ import {Link} from "react-router-dom";
 
 const CLIENT_ID = "d2db8ba7df624158987b5068d737afd7";
 const CLIENT_SECRET = "3a1c96cb492f4750aa714c23b587e5b6";
+const randomID = "2aPTvyE09vUCRwVvj0I8WK";
+
+
 
 
 const Search = () => {
     const [name, setName] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+    var [song, setSongID] = useState('');
 
-    const handleClick = () => { 
-    console.log("present following feed");
+    const handleClick = () => {
+
+
+        
+        song = song + randomID
+        const response = fetch('http://localhost:8000/api/register', {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'}, 
+            body: JSON.stringify({
+                song,
+            })
+        });
 };
+
+// const submitSong = async (e:SyntheticEvent) =>{
+//     e.preventDefault();
+//     user.SongID = 
+
+    
+    
+//   
+
 
 
 
 // this is the stuff that chandini and anisha did, but it conflicts with calling an api
-
     useEffect(() => {
         (
             async () => {
@@ -64,6 +52,8 @@ const Search = () => {
 
                 const content = await reponse.json();
                 setName(content.name);
+                // setEmail(content.email);
+                // setPassword(content.password);
             }
         )();
     });
@@ -151,7 +141,7 @@ const Search = () => {
                     placeholder = "Search Songs/Artists"
                     type="input"
                     onKeyPress={event => {
-                        if (event.key =="Enter") {
+                        if (event.key ==="Enter") {
                             search();
                         }
                     }}
@@ -165,8 +155,8 @@ const Search = () => {
                 <Button onClick ={search}>Search</Button>
             </InputGroup>
             <Link to="/feed">
-             <button className="w-100 btn btn-lg btn-primary my-2" type="submit" onClick={handleClick}>Submit Song/Go to Feed</button>
-         </Link>  
+             <button className="w-100 btn btn-lg btn-primary my-2" onClick={handleClick}>Submit Song</button>
+            </Link>  
         </Container>
         <div className='searchResults'>   
         <Container className= "cards">
