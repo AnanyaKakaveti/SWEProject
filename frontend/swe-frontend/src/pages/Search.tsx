@@ -12,19 +12,19 @@ const randomID = "2aPTvyE09vUCRwVvj0I8WK";
 
 const Search = () => {
     const [name, setName] = useState('');
-    // const [email, setEmail] = useState('');
+    var [email, setEmail] = useState('');
     // const [password, setPassword] = useState('');
     var [song, setSongID] = useState('');
 
     const handleClick = () => {
-
-
         
         song = song + randomID
-        const response = fetch('http://localhost:8000/api/register', {
+        // email = name
+        const response = fetch('http://localhost:8000/api/feed', {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'}, 
             body: JSON.stringify({
+                email,
                 song,
             })
         });
@@ -42,6 +42,30 @@ const Search = () => {
 
 
 // this is the stuff that chandini and anisha did, but it conflicts with calling an api
+    // useEffect(() => {
+    //     (
+    //         async () => {
+    //             const reponse = await fetch('http://localhost:8000/api/user', {
+    //                 headers: {'Content-Type' : 'application/json'}, 
+    //                 credentials : 'include',
+    //             });
+
+    //             const content = await reponse.json();
+    //             setName(content.name);
+    //             email = email + content.email;
+    //             console.log(content.email);
+    //             console.log(email);
+    //             // setPassword(content.password);
+    //         }
+    //     )();
+    // });
+
+
+
+    const [searchInput, setSearchInput] = useState("");
+    const [accessToken, setAccessToken] = useState("");
+    const [albums, setAlbums] = useState<any[]>([]);
+
     useEffect(() => {
         (
             async () => {
@@ -52,19 +76,12 @@ const Search = () => {
 
                 const content = await reponse.json();
                 setName(content.name);
-                // setEmail(content.email);
+                setEmail(content.Email);
                 // setPassword(content.password);
             }
         )();
-    });
 
 
-
-    const [searchInput, setSearchInput] = useState("");
-    const [accessToken, setAccessToken] = useState("");
-    const [albums, setAlbums] = useState<any[]>([]);
-
-    useEffect(() => {
         var authParameters = {
             method: 'POST',
             headers: {
