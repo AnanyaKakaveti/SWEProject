@@ -16,16 +16,16 @@ interface AppProps{
 //function App(){
    const [name, setName] = useState('');
   const App: React.FC<AppProps> = () => {
-useEffect(() => {
-  async() => {
-    const response = await fetch('http://localhost:8000/api/user', {
-      headers: {'Content-Type': 'application/json'},
-      credentials: 'include',
-  });
-  const content = await response.json();
-  setName(content.name);
-  }
-}, []);
+// useEffect(() => {
+//   async() => {
+//     const response = await fetch('http://localhost:8000/api/user', {
+//       headers: {'Content-Type': 'application/json'},
+//       credentials: 'include',
+//   });
+//   const content = await response.json();
+//   setName(content.name);
+//   }
+// }, []);
 
 const handleClick = () => { 
 console.log("User loging in");

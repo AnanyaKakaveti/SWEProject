@@ -22,26 +22,26 @@ const Search = () => {
 };
 
 // function to add songID to DB t
-const submitSongID = async (event:SyntheticEvent) =>{
-    console.log("this works")
-    event.preventDefault();
-    console.log("this works1")
-    const response = await fetch('http://localhost:8000/api/user', {
-        method: 'GET',
-        headers: {'Content-Type' : 'application/json'}, 
-        // body: JSON.stringify({
-        //     songID
-        // })
-    })
-    console.log("this works2")
-    const content = await response.json();
-    content.setSongID(randomID)
-    console.log("this works3")
-    console.log("does content work? " + content);
-    console.log("this works4")
-   // setsongID(content.randomID);
+// const submitSongID = async (event:SyntheticEvent) =>{
+//     console.log("this works")
+//     event.preventDefault();
+//     console.log("this works1")
+//     const response = await fetch('http://localhost:8000/api/user', {
+//         method: 'GET',
+//         headers: {'Content-Type' : 'application/json'}, 
+//         // body: JSON.stringify({
+//         //     songID
+//         // })
+//     })
+//     console.log("this works2")
+//     const content = await response.json();
+//     content.setSongID(randomID)
+//     console.log("this works3")
+//     console.log("does content work? " + content);
+//     console.log("this works4")
+//    // setsongID(content.randomID);
 
-}
+// }
 
 
 
@@ -152,7 +152,7 @@ const submitSongID = async (event:SyntheticEvent) =>{
         </div>
         
         <Container>
-        <form onSubmit = {submitSongID}>
+        {/* <form onSubmit = {submitSongID}> */}
             <InputGroup className= "mb-3" size="lg">
                 <Form.Control 
                     placeholder = "Search Songs/Artists"
@@ -169,7 +169,7 @@ const submitSongID = async (event:SyntheticEvent) =>{
                         //setsongID(e.target.value); 
                         console.log('input: ' + searchInput);
                         search();
-                        submitSongID(e); 
+                        // submitSongID(e); 
                         
                     }
                     }
@@ -177,7 +177,7 @@ const submitSongID = async (event:SyntheticEvent) =>{
                     />
                 <Button onClick ={search}>Search</Button>
             </InputGroup>
-            </form>
+            {/* </form> */}
             {/* <form onSubmit = {submitSongID}> */}
             <Link to="/feed">
              <button className="w-100 btn btn-lg btn-primary my-2" type="submit" onClick={handleClick}>Submit Song/Go to Feed

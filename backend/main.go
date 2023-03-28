@@ -75,12 +75,16 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 }
 
 type User struct {
-	Id          uint   `json: "id"`
-	Name        string `json:"name"`
-	Email       string `json: "email" gorm: "unique"`
-	Password    []byte `json: "-"`
-	CurrentSong string `json: "song"`
+	Id       uint   `json:"id"`
+	Name     string `json:"name"`
+	Email    string `json:"email" gorm: "unique"`
+	Password []byte `json:"-"`
 }
+// type Post struct {
+// 	PostID      string `json:"postid"`
+// 	CurrentSong string `json: "song"`
+// 	//User        User   `gorm: "references:Id"` // returns user attribtures with new post
+// }
 
 func setupRoutes() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -103,9 +107,8 @@ func Connect() {
 
 	DB = connection
 
-	connection.AutoMigrate(
-		User{},
-	)
+	connection.AutoMigrate(&User{})
+	// connection.AutoMigrate(&Post{})
 
 }
 
@@ -119,10 +122,10 @@ func Register(c *fiber.Ctx) error {
 	password, _ := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
 
 	user := User{
-		Name:        data["name"],
-		Email:       data["email"],
-		Password:    password,
-		CurrentSong: data["song"],
+		Name:     data["name"],
+		Email:    data["email"],
+		Password: password,
+		// CurrentSong: data["song"],
 	}
 
 	DB.Create(&user)
@@ -132,30 +135,24 @@ func Register(c *fiber.Ctx) error {
 	//return c.SendString("Hello, World 👋!")
 }
 
-// this func is not necessary
-func SongID(c *fiber.Ctx) error {
-	var data map[string]string
+// func SongPost(c *fiber.Ctx) error {
 
-	if err := c.BodyParser(&data); err != nil {
-		return err
-	}
+// 	var data map[string]string
 
-	var user User
+// 	if err := c.BodyParser(&data); err != nil {
+// 		return err
+// 	}
 
-	DB.Where("song = ?", data["song"]).First(&user)
+// 	post := Post{
+// 		PostID:      data["postid"],
+// 		CurrentSong: data["song"],
+// 	}
 
-	if user.Id == 0 {
-		c.Status(fiber.StatusNotFound)
-		//Fiber map is a map with a stirng and an interface (can put anythin there)
-		return c.JSON(fiber.Map{
-			"message": "user not found",
-		})
-	}
-	return c.JSON(fiber.Map{
-		"message": "success",
-	})
+// 	DB.Create(&post)
 
-}
+// 	return c.JSON(post)
+
+// }
 
 const SecretKey = "secret"
 
@@ -264,7 +261,7 @@ func Setup(app *fiber.App) {
 	app.Post("/api/register", Register)
 	app.Post("/api/login", Login)
 	app.Get("/api/user", Users)
-	app.Post("/api/search", SongID)
+	// app.Post("/api/search", SongPost)
 	app.Post("/api/logout", Logout)
 }
 
