@@ -79,6 +79,11 @@ type User struct {
 	Name 		string `json:"name"`
 	Email 		string `json: "email" gorm: "unique"`
 	Password 	[]byte `json: "-"`
+	// Song		string `json: "song"`
+}
+
+type Post struct {
+	Email 		string `json: "email" gorm: "unique"`
 	Song		string `json: "song"`
 }
 
@@ -103,7 +108,7 @@ func Connect() {
 
 	DB = connection
 
-	connection.AutoMigrate(&User{})
+	connection.AutoMigrate(&User{}, &Post{})
 }
 
 
@@ -121,7 +126,7 @@ func Register(c *fiber.Ctx) error {
 		Name: 		data["name"],
 		Email: 		data["email"],
 		Password: 	password,
-		Song: 		data["song"],
+		// Song: 		data["song"],
 	}
 	
 
@@ -132,18 +137,24 @@ func Register(c *fiber.Ctx) error {
 	//return c.SendString("Hello, World 👋!")
 }
 
-func Song(c *fiber.Ctx) error {
+func Posts(c *fiber.Ctx) error {
 	var data map[string]string
 
 	if err :=c.BodyParser(&data); err !=nil {
 		return err
 	}
+
+
+	post := Post {
+		Email: 		data["email"],
+		Song: 		data["song"],
+		// Song: 		data["song"],
+	}
 	
-	var user User
-	DB.Where("email = ?", data["email"]).First(&user)
-	DB.Set(user.Song, "random")
+
+	DB.Create(&post)
 	
-	return c.JSON(user)
+	return c.JSON(post)
 
 	//return c.SendString("Hello, World 👋!")
 }
@@ -264,7 +275,7 @@ func Setup(app *fiber.App) {
 	app.Post("/api/login", Login)
 	app.Get("/api/user" , Users)
 	app.Post("/api/logout", Logout)
-	// app.Post("/api/song" , Song)
+	app.Post("/api/feed" , Posts)
 }
 
 
