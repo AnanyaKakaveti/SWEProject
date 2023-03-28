@@ -80,8 +80,6 @@ type User struct {
 	Email       string `json: "email" gorm: "unique"`
 	Password    []byte `json: "-"`
 	CurrentSong string `json: "song"`
-	// CurrentSong string   `json: "current song"`
-	// Songs       []string `json: "all songs"`
 }
 
 func setupRoutes() {
@@ -135,26 +133,29 @@ func Register(c *fiber.Ctx) error {
 }
 
 // this func is not necessary
-// func Search(c *fiber.Ctx) error {
-// 	var data map[string]string
+func SongID(c *fiber.Ctx) error {
+	var data map[string]string
 
-// 	if err := c.BodyParser(&data); err != nil {
-// 		return err
-// 	}
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
 
-// 	password, _ := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
+	var user User
 
-// 	user := User{
-// 		Name:        data["name"],
-// 		Email:       data["email"],
-// 		Password:    password,
-// 		CurrentSong: data["song"],
-// 	}
+	DB.Where("song = ?", data["song"]).First(&user)
 
-// 	DB.Create(&user)
+	if user.Id == 0 {
+		c.Status(fiber.StatusNotFound)
+		//Fiber map is a map with a stirng and an interface (can put anythin there)
+		return c.JSON(fiber.Map{
+			"message": "user not found",
+		})
+	}
+	return c.JSON(fiber.Map{
+		"message": "success",
+	})
 
-// 	return c.JSON(user)
-// }
+}
 
 const SecretKey = "secret"
 
@@ -263,7 +264,7 @@ func Setup(app *fiber.App) {
 	app.Post("/api/register", Register)
 	app.Post("/api/login", Login)
 	app.Get("/api/user", Users)
-	//app.Post("/api/search", Search)
+	app.Post("/api/search", SongID)
 	app.Post("/api/logout", Logout)
 }
 

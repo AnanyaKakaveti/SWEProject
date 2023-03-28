@@ -11,7 +11,7 @@ import e from 'express';
 
 const CLIENT_ID = "d2db8ba7df624158987b5068d737afd7";
 const CLIENT_SECRET = "3a1c96cb492f4750aa714c23b587e5b6";
-var randomID = "2aPTvyE09vUCRwVvj0I8WK";
+const randomID = "2aPTvyE09vUCRwVvj0I8WK";
 
 const Search = () => {
     const [name, setName] = useState('');
@@ -20,20 +20,26 @@ const Search = () => {
     const handleClick = () => { 
     console.log("present following feed");
 };
-// function to add songID to DB t
-const submit = async (event:SyntheticEvent) =>{
-    event.preventDefault();
 
-    const response = await fetch('http://localhost:8000/api/register', {
-        method: 'POST',
+// function to add songID to DB t
+const submitSongID = async (event:SyntheticEvent) =>{
+    console.log("this works")
+    event.preventDefault();
+    console.log("this works1")
+    const response = await fetch('http://localhost:8000/api/user', {
+        method: 'GET',
         headers: {'Content-Type' : 'application/json'}, 
-        body: JSON.stringify({
-            songID
-        })
+        // body: JSON.stringify({
+        //     songID
+        // })
     })
+    console.log("this works2")
     const content = await response.json();
-    console.log(content);
-    //setsongID(content.randomID);
+    content.setSongID(randomID)
+    console.log("this works3")
+    console.log("does content work? " + content);
+    console.log("this works4")
+   // setsongID(content.randomID);
 
 }
 
@@ -137,7 +143,6 @@ const submit = async (event:SyntheticEvent) =>{
 
     console.log(albums);
     return (
-        <form onSubmit = {submit}>
     <div>
         <h1 className="text" >Daily Song Picker</h1>
 
@@ -147,6 +152,7 @@ const submit = async (event:SyntheticEvent) =>{
         </div>
         
         <Container>
+        <form onSubmit = {submitSongID}>
             <InputGroup className= "mb-3" size="lg">
                 <Form.Control 
                     placeholder = "Search Songs/Artists"
@@ -158,21 +164,26 @@ const submit = async (event:SyntheticEvent) =>{
                     }}
                     onChange={e => {
                         setSearchInput(e.target.value);
-                        setsongID(e.target.value); 
                         console.log('song: ' + e.target.value); 
+                        console.log("checking setSongID function"); 
+                        //setsongID(e.target.value); 
                         console.log('input: ' + searchInput);
                         search();
+                        submitSongID(e); 
+                        
                     }
                     }
                     
                     />
                 <Button onClick ={search}>Search</Button>
             </InputGroup>
-            
+            </form>
+            {/* <form onSubmit = {submitSongID}> */}
             <Link to="/feed">
              <button className="w-100 btn btn-lg btn-primary my-2" type="submit" onClick={handleClick}>Submit Song/Go to Feed
              </button>
          </Link>  
+         {/* </form> */}
          
         </Container>
         <div className='searchResults'>   
@@ -199,7 +210,7 @@ const submit = async (event:SyntheticEvent) =>{
 
         
     </div>
-    </form>
+   
      );
      
  };

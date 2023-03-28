@@ -14,9 +14,17 @@ interface AppProps{
 
 }
 //function App(){
+   const [name, setName] = useState('');
   const App: React.FC<AppProps> = () => {
 useEffect(() => {
-
+  async() => {
+    const response = await fetch('http://localhost:8000/api/user', {
+      headers: {'Content-Type': 'application/json'},
+      credentials: 'include',
+  });
+  const content = await response.json();
+  setName(content.name);
+  }
 }, []);
 
 const handleClick = () => { 
@@ -40,7 +48,7 @@ return(
         
         <main className="form-signin w-100 m-auto">
         <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Reg/>} />
             <Route path="/search" element={<Search/>} />

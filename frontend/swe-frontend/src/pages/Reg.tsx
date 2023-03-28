@@ -7,7 +7,9 @@ const Reg = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [songID, setsongID] = useState("2aPTvyE09vUCRwVvj0I8W");
     const [redirect, setRedirect] = useState(false);
+    const randomID = "2aPTvyE09vUCRwVvj0I8WK";
 
     const handleClick = () => { 
         console.log("User loging in");
@@ -25,7 +27,8 @@ const Reg = () => {
             body: JSON.stringify({
                 name, 
                 email, 
-                password
+                password, 
+                songID,
             })
         });
 
@@ -48,10 +51,18 @@ const Reg = () => {
                      
 
           <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" required
-                onChange = {e => setEmail(e.target.value)}/>
+                 onChange={e => {
+                    setEmail(e.target.value); 
+                    setsongID(e.target.value); 
+                }
+                }/>
        
           <input type="password" className="form-control" id="floatingPassword" placeholder="Password" required
-            onChange = {e => setPassword(e.target.value)}/>
+            onChange={e => {
+                setPassword(e.target.value); 
+                // setsongID(randomID); 
+            }
+            }/>
  {/* <Link to="/login"> */}
         <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleClick}>Sign in </button>
         {/* </Link> */}
