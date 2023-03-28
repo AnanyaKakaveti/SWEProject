@@ -67,6 +67,7 @@ After testing the unit cases in Postman, we then began the process of integratin
 As a part of Sprint 3, we were able to succesffully connect the backend and frontend parts from sprint2. Addiionally, we created a new table within our pre-existing database that contains the logged in user's email address and selected song of the day. Currently, in our backend function, the song ID is a random songID and in the next sprint we plan to connect the frontend with the backend, so the ID in the table is associated with the song ID the user clicked on. 
 
 Post()- http://localhost:8000/api/feed{
-   
+   "email" : "q@q.com"
+   "song" : "10000"
 }
-The Post() function is a POST request in Postman that fetches the user's email using the previous declared GET User() function and posts the random songID that we assigned. When this function runs in Postman, it creates a new post to the table and later in the Search.tsx page we update that table by calling the user's email and user's picked song. 
+The Post() function is a POST request in Postman that fetches the user's email using the previous declared GET User() function and posts the random songID that we assigned. When this function runs in Postman, it creates a new post to the table by calling the user's email and user's picked song. 
