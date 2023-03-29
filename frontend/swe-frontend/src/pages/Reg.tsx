@@ -2,7 +2,6 @@ import React, {SyntheticEvent, useState} from 'react'
 import { ModalBody } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 import {Link} from "react-router-dom";
-import {Search} from './Search';
 
  //import { Connect, SendMessage } from "./api";
 

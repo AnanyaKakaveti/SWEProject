@@ -80,4 +80,8 @@ We used the Spotify API (https://developer.spotify.com/documentation/web-api) an
 
 The search page has a function that highlights a song that the mouse hovers over, which will soon be expanded upon to have a selection functionality. Once we develop the ability to select a given song, we can save the ID of the song and access it directly from the Spotify API. We can then display the same information on the feed page and other areas that we might want to access this data.
 
-We also implemented a profile page that displays the user's name and email (as supplied from the backend). This profile page can be accessed via a button on the feed page, and also has a button that allows the user to return to the feed page. Of course, the profile page will be expanded upon in the future so that perhaps the user can view their songs that they chose in the past.
+We also implemented a profile page that displays the user's name and email (as supplied from the backend). This profile page can be accessed via a button on the feed page, and also has a button that allows the user to return to the feed page. Of course, the profile page will be expanded upon in the future so that perhaps the user can view their songs that they chose in the past. 
+
+Other functionalities that we are thinking of adding include: a small audio preview of the song they hover over to make the song selection page more interactive, a feed page that uses the database and displays songs that other people have posted, a profile page with a changeable profile picture (perhaps using artists' images from the API) and other profile-related attributes.
+
+We also created two cypress tests to ensure the search page and the profile page were being reached accurately. They all passed as expected.

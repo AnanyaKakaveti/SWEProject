@@ -19,7 +19,7 @@ export const Profile = (props: ProfileProps) => {
 
                 const content = await reponse.json();
                 setName(content.name);
-                setEmail(content.email);
+                setEmail(content.Email);
             }
         )();
     });

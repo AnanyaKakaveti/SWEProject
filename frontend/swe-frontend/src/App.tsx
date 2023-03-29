@@ -49,7 +49,6 @@ return(
         </Routes>  
         <Footer/>
         </main>
-        <Footer/>
     </BrowserRouter>
     {/* <button onClick={handleClick}>Hit</button> */}
         </div>

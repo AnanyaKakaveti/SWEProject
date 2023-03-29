@@ -30,38 +30,6 @@ const Search = () => {
         });
 };
 
-// const submitSong = async (e:SyntheticEvent) =>{
-//     e.preventDefault();
-//     user.SongID = 
-
-    
-    
-//   
-
-
-
-
-// this is the stuff that chandini and anisha did, but it conflicts with calling an api
-    // useEffect(() => {
-    //     (
-    //         async () => {
-    //             const reponse = await fetch('http://localhost:8000/api/user', {
-    //                 headers: {'Content-Type' : 'application/json'}, 
-    //                 credentials : 'include',
-    //             });
-
-    //             const content = await reponse.json();
-    //             setName(content.name);
-    //             email = email + content.email;
-    //             console.log(content.email);
-    //             console.log(email);
-    //             // setPassword(content.password);
-    //         }
-    //     )();
-    // });
-
-
-
     const [searchInput, setSearchInput] = useState("");
     const [accessToken, setAccessToken] = useState("");
     const [albums, setAlbums] = useState<any[]>([]);
@@ -148,7 +116,7 @@ const Search = () => {
         <h1 className="text" >Daily Song Picker</h1>
 
         {/* <input type="name" className="form-control" id="floatingInput" placeholder="Search song" required/> */}
-        <div>
+        <div className ="slogan">
             {name ? "Hi " + name : "You are not logged in"}
         </div>
         
