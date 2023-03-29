@@ -7,46 +7,42 @@ import Home from "./pages/Home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Reg from "./pages/Reg";
 import Feed from "./pages/Feed";
-import Logout from "./pages/Logout";
 import Search from "./pages/Search";
 import Footer from "./components/Footer";
 
 interface AppProps{
 
 }
-//function App(){
-  const App: React.FC<AppProps> = () => {
+function App(){
+// const App: React.FC<AppProps> = () => {
 useEffect(() => {
 
 }, []);
 
 const handleClick = () => { 
-console.log("User loging in");
+console.log("User logging in");
 };
 
-const navProps = {
-  // set the properties of the navProps object here
-  isVisible: false
-};
+// const navProps = {
+//   // set the properties of the navProps object here
+//   isVisible: false
+// };
 
 
-const [nameState, setNameState] = useState('');
+
 
 return(
-  
      <div className="App">    
         <BrowserRouter>
-        <Nav nameState={nameState} />
+        <Nav/>
 
         {/* name = {name} setName = {setName} */}
         
         <main className="form-signin w-100 m-auto">
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login/>} />
+            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Reg/>} />
-            {/* <Route path="/search" element={<Search setNameState={setNameState}/>} /> */}
-            <Route path="/logout" element={<Logout/>} />
             <Route path="/search" element={<Search/>} />
             <Route path="/feed" element={<Feed/>} />
         </Routes>  
