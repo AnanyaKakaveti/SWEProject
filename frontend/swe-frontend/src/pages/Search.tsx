@@ -9,11 +9,8 @@ const randomID = "2aPTvyE09vUCRwVvj0I8WK";
 
 
 
-type SearchProps = {
-    name: string
-}
 
-export const Search = (props: SearchProps) => {
+const Search = () => {
     const [name, setName] = useState('');
     var [email, setEmail] = useState('');
     // const [password, setPassword] = useState('');
@@ -85,11 +82,6 @@ export const Search = (props: SearchProps) => {
         )();
 
 
-    const [searchInput, setSearchInput] = useState("");
-    const [accessToken, setAccessToken] = useState("");
-    const [albums, setAlbums] = useState<any[]>([]);
-
-    useEffect(() => {
         var authParameters = {
             method: 'POST',
             headers: {
@@ -156,8 +148,8 @@ export const Search = (props: SearchProps) => {
         <h1 className="text" >Daily Song Picker</h1>
 
         {/* <input type="name" className="form-control" id="floatingInput" placeholder="Search song" required/> */}
-        <div className="greeting">
-            {name ? "Hi " + name + " Pick your daily song": "You are not logged in"}
+        <div>
+            {name ? "Hi " + name : "You are not logged in"}
         </div>
         
         <Container>
@@ -177,11 +169,11 @@ export const Search = (props: SearchProps) => {
                     }
                     }
                     />
-                <button className="btn-primary" onClick ={search}>Search</button>
+                <Button onClick ={search}>Search</Button>
             </InputGroup>
             <Link to="/feed">
-             <button className="w-100 btn btn-lg btn-primary my-2" type="submit" onClick={handleClick}>Submit Song/Go to Feed</button>
-         </Link>  
+             <button className="w-100 btn btn-lg btn-primary my-2" onClick={handleClick}>Submit Song</button>
+            </Link>  
         </Container>
         <div className='searchResults'>   
         <Container className= "cards">
@@ -200,10 +192,15 @@ export const Search = (props: SearchProps) => {
                 })}
             </Row>
         </Container>
-        </div> 
+        </div>
+        
+        
+        
+
+        
     </div>
     
      );
  };
 
-//export default Search;
+export default Search;

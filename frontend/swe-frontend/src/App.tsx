@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Reg from "./pages/Reg";
 import Feed from "./pages/Feed";
-import {Search} from "./pages/Search";
+import Search from "./pages/Search";
 import {Profile} from "./pages/Profile";
 import Footer from "./components/Footer";
 
@@ -43,7 +43,7 @@ return(
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Reg/>} />
-            <Route path="/search" element={<Search name = 'Amanda'/>} />
+            <Route path="/search" element={<Search/>} />
             <Route path="/feed" element={<Feed/>} />
             <Route path="/profile" element={<Profile name = "name" email="email" />} />
         </Routes>  
