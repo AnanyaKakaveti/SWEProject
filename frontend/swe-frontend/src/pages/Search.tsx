@@ -1,39 +1,3 @@
-
-// import React, {SyntheticEvent, useState} from 'react'
-// import {Link} from "react-router-dom";
-
-
-// const Search = () => {
-
-//     const [song, setSong] = useState('');
-
-// const handleClick = () => { 
-//     console.log("present following feed");
-// };
-
-// const submit = (e: SyntheticEvent) => {
-//     e.preventDefault();
-
-//     console.log({
-//        song
-//     })
-// }
-
-//     return (
-
-//     <form onSubmit = {submit}>
-//         <h1 className="text" >Search for your song of the day</h1>
-//         <input type="song" className="form-control" id="floatingInput" placeholder="Search song" required/>
-
-//         <Link to="/feed">
-//             <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleClick}>submit song</button>
-//         </Link>  
-
-//     </form>
-
-    
-
-
 import React, { useEffect, SyntheticEvent, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Form, InputGroup, FormControl, Button, Row, Card} from 'react-bootstrap';
@@ -41,6 +5,9 @@ import {Link} from "react-router-dom";
 
 const CLIENT_ID = "d2db8ba7df624158987b5068d737afd7";
 const CLIENT_SECRET = "3a1c96cb492f4750aa714c23b587e5b6";
+const randomID = "2aPTvyE09vUCRwVvj0I8WK";
+
+
 
 type SearchProps = {
     name: string
@@ -48,28 +15,53 @@ type SearchProps = {
 
 export const Search = (props: SearchProps) => {
     const [name, setName] = useState('');
+    var [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+    var [song, setSongID] = useState('');
 
-    const handleClick = () => { 
-    console.log("present following feed");
+    const handleClick = () => {
+        
+        song = song + randomID
+        // email = name
+        const response = fetch('http://localhost:8000/api/feed', {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'}, 
+            body: JSON.stringify({
+                email,
+                song,
+            })
+        });
 };
+
+// const submitSong = async (e:SyntheticEvent) =>{
+//     e.preventDefault();
+//     user.SongID = 
+
+    
+    
+//   
+
 
 
 
 // this is the stuff that chandini and anisha did, but it conflicts with calling an api
+    // useEffect(() => {
+    //     (
+    //         async () => {
+    //             const reponse = await fetch('http://localhost:8000/api/user', {
+    //                 headers: {'Content-Type' : 'application/json'}, 
+    //                 credentials : 'include',
+    //             });
 
-    useEffect(() => {
-        (
-            async () => {
-                const reponse = await fetch('http://localhost:8000/api/user', {
-                    headers: {'Content-Type' : 'application/json'}, 
-                    credentials : 'include',
-                });
-
-                const content = await reponse.json();
-                setName(content.name);
-            }
-        )();
-    });
+    //             const content = await reponse.json();
+    //             setName(content.name);
+    //             email = email + content.email;
+    //             console.log(content.email);
+    //             console.log(email);
+    //             // setPassword(content.password);
+    //         }
+    //     )();
+    // });
 
 
 
@@ -84,11 +76,20 @@ export const Search = (props: SearchProps) => {
                     headers: {'Content-Type' : 'application/json'}, 
                     credentials : 'include',
                 });
-        
+
                 const content = await reponse.json();
                 setName(content.name);
-                } )();
-                
+                setEmail(content.Email);
+                // setPassword(content.password);
+            }
+        )();
+
+
+    const [searchInput, setSearchInput] = useState("");
+    const [accessToken, setAccessToken] = useState("");
+    const [albums, setAlbums] = useState<any[]>([]);
+
+    useEffect(() => {
         var authParameters = {
             method: 'POST',
             headers: {
@@ -165,7 +166,7 @@ export const Search = (props: SearchProps) => {
                     placeholder = "Search Songs/Artists"
                     type="input"
                     onKeyPress={event => {
-                        if (event.key =="Enter") {
+                        if (event.key ==="Enter") {
                             search();
                         }
                     }}
@@ -179,7 +180,7 @@ export const Search = (props: SearchProps) => {
                 <button className="btn-primary" onClick ={search}>Search</button>
             </InputGroup>
             <Link to="/feed">
-             <button className="btn-primary" type="submit" onClick={handleClick}>Submit Song/Go to Feed</button>
+             <button className="w-100 btn btn-lg btn-primary my-2" type="submit" onClick={handleClick}>Submit Song/Go to Feed</button>
          </Link>  
         </Container>
         <div className='searchResults'>   

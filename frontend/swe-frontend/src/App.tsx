@@ -47,7 +47,7 @@ return(
             <Route path="/feed" element={<Feed/>} />
             <Route path="/profile" element={<Profile name = "name" email="email" />} />
         </Routes>  
-        {/* <Footer/> */}
+        <Footer/>
         </main>
         <Footer/>
     </BrowserRouter>

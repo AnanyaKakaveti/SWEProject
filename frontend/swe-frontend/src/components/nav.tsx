@@ -57,8 +57,10 @@ const Nav = () => {
             </li>
             <li className="nav-item active">
               <Link to="/Register" className="nav-link" >Register</Link>
-           
             </li>
+            {/* <li className="nav-item active">
+              <Link to="/feed" className="nav-link" >Feed</Link>
+            </li> */}
       </ul>
         </div>
       </div>

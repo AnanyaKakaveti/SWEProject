@@ -11,29 +11,33 @@ const Reg = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
+    const randomID = "2aPTvyE09vUCRwVvj0I8WK";
+    var [song, setSong] = useState('');
+    
 
     const handleClick = () => { 
         console.log("User loging in");
-       
         // SendMessage("User loging in");
         };
 
         
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
-
+        // song = song + randomID
         const response = await fetch('http://localhost:8000/api/register', {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'}, 
             body: JSON.stringify({
                 name, 
                 email, 
-                password
+                password, 
+                song,
             })
         });
 
         const content = await response.json();
         console.log(content);
+        console.log(content.song)
 
 
         setRedirect(true);
@@ -51,7 +55,9 @@ const Reg = () => {
                       
         {/* <Search name = 'Amanda' /> */}
           <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" required
-                onChange = {e => setEmail(e.target.value)}/>
+                onChange = {e => {
+                    setEmail(e.target.value);
+                }}/>
        
           <input type="password" className="form-control" id="floatingPassword" placeholder="Password" required
             onChange = {e => setPassword(e.target.value)}/>
