@@ -10,7 +10,7 @@ const Feed = () => {
     <div className="col-lg-6 col-md-8 mx-auto">
       <h1 className="fw-light">Jam Feed</h1>
       <p className="lead">Wondering what your friends are listening to? Look no further</p>
-    
+      <button className="btn-primary" > <Link to="/Profile" className="nav-link" >Go to Profile</Link> </button>
     </div>
   </div>
 </section>

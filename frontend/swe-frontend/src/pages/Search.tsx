@@ -42,8 +42,11 @@ import {Link} from "react-router-dom";
 const CLIENT_ID = "d2db8ba7df624158987b5068d737afd7";
 const CLIENT_SECRET = "3a1c96cb492f4750aa714c23b587e5b6";
 
+type SearchProps = {
+    name: string
+}
 
-const Search = () => {
+export const Search = (props: SearchProps) => {
     const [name, setName] = useState('');
 
     const handleClick = () => { 
@@ -152,8 +155,8 @@ const Search = () => {
         <h1 className="text" >Daily Song Picker</h1>
 
         {/* <input type="name" className="form-control" id="floatingInput" placeholder="Search song" required/> */}
-        <div>
-            {name ? "Hi " + name : "You are not logged in"}
+        <div className="greeting">
+            {name ? "Hi " + name + " Pick your daily song": "You are not logged in"}
         </div>
         
         <Container>
@@ -173,10 +176,10 @@ const Search = () => {
                     }
                     }
                     />
-                <Button onClick ={search}>Search</Button>
+                <button className="btn-primary" onClick ={search}>Search</button>
             </InputGroup>
             <Link to="/feed">
-             <button className="w-100 btn btn-lg btn-primary my-2" type="submit" onClick={handleClick}>Submit Song/Go to Feed</button>
+             <button className="btn-primary" type="submit" onClick={handleClick}>Submit Song/Go to Feed</button>
          </Link>  
         </Container>
         <div className='searchResults'>   
@@ -196,15 +199,10 @@ const Search = () => {
                 })}
             </Row>
         </Container>
-        </div>
-        
-        
-        
-
-        
+        </div> 
     </div>
     
      );
  };
 
-export default Search;
+//export default Search;
