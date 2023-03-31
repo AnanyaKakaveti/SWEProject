@@ -10,6 +10,7 @@ import Feed from "./pages/Feed";
 import Search from "./pages/Search";
 import {Profile} from "./pages/Profile";
 import Footer from "./components/Footer";
+import Logout from "./pages/Logout";
 
 interface AppProps{
 
@@ -46,6 +47,7 @@ return(
             <Route path="/search" element={<Search/>} />
             <Route path="/feed" element={<Feed/>} />
             <Route path="/profile" element={<Profile name = "name" email="email" />} />
+            <Route path="/logout" element={<Logout/>} />
         </Routes>  
         <Footer/>
         </main>

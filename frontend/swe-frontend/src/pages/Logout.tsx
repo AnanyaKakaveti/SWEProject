@@ -2,11 +2,7 @@ import react, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 
 
-type ProfileProps = {
-    name: string
-    email: string
-}
-export const Profile = (props: ProfileProps) => {
+export const Logout = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     useEffect(() => {
@@ -26,14 +22,15 @@ export const Profile = (props: ProfileProps) => {
 
 return(
     <div className ="greeting">
-   <h1> {name ? "Hi " + name + " Welcome to your profile page": "You are not logged in"}</h1> 
-    <p> {email ? "Email: " + email : "your email is amanda@gmail.com"}</p>
+   <h1>Are you sure you want to logout?</h1> 
+    <p> {name ? "Name: " + name : "You are not logged in"}</p>
+    <p> {email ? "Email: " + email : "You don''t have a registered email"}</p>
     
+    <button className= "btn-primary"> <Link to="/Home" className="nav-link" >Yes, Logout</Link>  </button>
     <button className= "btn-primary"> <Link to="/Feed" className="nav-link" >Go back to Feed</Link>  </button>
-    <button className= "btn-primary"> <Link to="/Home" className="nav-link" >Delete My Account (not functional)</Link>  </button>
     </div>
    
 );
 };
 
-// export default Profile;
+export default Logout;
