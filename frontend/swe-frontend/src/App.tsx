@@ -10,6 +10,7 @@ import Feed from "./pages/Feed";
 import Search from "./pages/Search";
 import {Profile} from "./pages/Profile";
 import Footer from "./components/Footer";
+import Logout from "./pages/Logout";
 
 interface AppProps{
 
@@ -38,7 +39,7 @@ return(
 
         {/* name = {name} setName = {setName} */}
         
-        <main className="form-signin w-100 m-auto">
+        
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -46,11 +47,12 @@ return(
             <Route path="/search" element={<Search/>} />
             <Route path="/feed" element={<Feed/>} />
             <Route path="/profile" element={<Profile name = "name" email="email" />} />
-        </Routes>  
+            <Route path="/logout" element={<Logout/>} />
+        </Routes>
+        
         <Footer/>
-        </main>
+        
     </BrowserRouter>
-    {/* <button onClick={handleClick}>Hit</button> */}
         </div>
 );
 };

@@ -47,24 +47,27 @@ const Reg = () => {
     return <Navigate to= "/login"/>;
 
     return (
-        <form onSubmit = {submit}>
-        <h1 className="text">Welcome to JAM. Sign in below</h1>
-        <input type="name" className="form-control" id="floatingInput" placeholder="First Last" required
-                        onChange = {e => setName(e.target.value)}/>
-                      
-        {/* <Search name = 'Amanda' /> */}
-          <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" required
-                onChange = {e => {
-                    setEmail(e.target.value);
-                }}/>
-       
-          <input type="password" className="form-control" id="floatingPassword" placeholder="Password" required
-            onChange = {e => setPassword(e.target.value)}/>
- {/* <Link to="/login"> */}
-        <button className="btn-primary" type="submit" onClick={handleClick}>Sign in </button>
-        {/* </Link> */}
-        <p className="mt-5 mb-3 text-muted">&copy; 2023</p>
-      </form>
+        <main className="form-signin w-100 m-auto">
+            <form onSubmit = {submit}>
+            <h1 className="text">Welcome to JAM. Sign in below</h1>
+            <input type="name" className="form-control" id="floatingInput" placeholder="First Last" required
+                            onChange = {e => setName(e.target.value)}/>
+                        
+            {/* <Search name = 'Amanda' /> */}
+            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" required
+                    onChange = {e => {
+                        setEmail(e.target.value);
+                    }}/>
+        
+            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" required
+                onChange = {e => setPassword(e.target.value)}/>
+    {/* <Link to="/login"> */}
+            <button className="btn-primary" type="submit" onClick={handleClick}>Sign in </button>
+            {/* </Link> */}
+            {/* <p className="mt-5 mb-3 text-muted">&copy; 2023</p> */}
+        </form>
+        <div className ="space"></div>
+      </main>
     );
 };
 
