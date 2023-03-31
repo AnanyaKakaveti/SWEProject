@@ -39,7 +39,7 @@ return(
 
         {/* name = {name} setName = {setName} */}
         
-        <main className="form-signin w-100 m-auto">
+        
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -48,11 +48,11 @@ return(
             <Route path="/feed" element={<Feed/>} />
             <Route path="/profile" element={<Profile name = "name" email="email" />} />
             <Route path="/logout" element={<Logout/>} />
-        </Routes>  
+        </Routes>
+        
         <Footer/>
-        </main>
+        
     </BrowserRouter>
-    {/* <button onClick={handleClick}>Hit</button> */}
         </div>
 );
 };

@@ -129,7 +129,7 @@ const LoggedOut = () => {
               <Link to="/login" className="nav-link" aria-current="page">Login</Link>
             </li>
             <li className="nav-item active">
-              <Link to="/Register" className="nav-link" >Register</Link>
+              <Link to="/register" className="nav-link" >Register</Link>
             </li>
             
       </ul>
@@ -157,15 +157,15 @@ const LoggedIn: React.FC <NavProps2> = ({name}) => {
         <div>
           
           <ul className="navbar-nav me-auto mb-2 mb-md-0">
-          <li className="nav-item active">
-            <Link to="/Profile" className="nav-link" >{"Welcome " + name + "!"}</Link>
-             
-          </li>
-          <li className="nav-item active">
-              <Link to="/Logout" className="nav-link" >Logout</Link>
-          </li>
+            <li className="nav-item active">
+              <Link to="/profile" className="nav-link" >{"Welcome " + name + "!"}</Link>
+              
+            </li>
+            <li className="nav-item active">
+                <Link to="/logout" className="nav-link" >Logout</Link>
+            </li>
             
-      </ul>
+          </ul>
         </div>
       </div>
     </nav>

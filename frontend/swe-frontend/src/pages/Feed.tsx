@@ -4,13 +4,14 @@ import {Link} from "react-router-dom";
 
 const Feed = () => {
     return (
+    <main className="form-signin w-100 m-auto">
      <div className="feed">    
 <section className="py-5 text-center container">
   <div className="row py-lg-5">
     <div className="col-lg-6 col-md-8 mx-auto">
       <h1 className="fw-light">Jam Feed</h1>
       <p className="lead">Wondering what your friends are listening to? Look no further</p>
-      <button className="btn-primary" > <Link to="/Profile" className="nav-link" >Go to Profile</Link> </button>
+      <button className="btn-primary" > <Link to="/profile" className="nav-link" >Go to Profile</Link> </button>
     </div>
   </div>
 </section>
@@ -82,6 +83,7 @@ const Feed = () => {
 
 
 </div>
+</main>
       
     );
 }; 

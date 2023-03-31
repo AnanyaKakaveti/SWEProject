@@ -6,7 +6,7 @@ import Typed from 'react-typed';
 const Home: React.FC = () => {
 
     return (
-        <div>
+        <main className="form-signin w-100 m-auto">
           <div className="style">JAM.</div>  
           <div className= 'flex justify-center items-center'>
             <p className="slogan">
@@ -21,8 +21,8 @@ const Home: React.FC = () => {
             // backDelay={200} 
             loop/>
             </div>
-            
-        </div>
+            <div className ="space"></div>
+        </main>
     );
 };
 

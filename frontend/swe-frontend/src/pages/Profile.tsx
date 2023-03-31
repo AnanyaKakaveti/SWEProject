@@ -25,13 +25,19 @@ export const Profile = (props: ProfileProps) => {
     });
 
 return(
-    <div className ="greeting">
-   <h1> {name ? "Hi " + name + " Welcome to your profile page": "You are not logged in"}</h1> 
-    <p> {email ? "Email: " + email : "your email is amanda@gmail.com"}</p>
-    
-    <button className= "btn-primary"> <Link to="/Feed" className="nav-link" >Go back to Feed</Link>  </button>
-    <button className= "btn-primary"> <Link to="/Home" className="nav-link" >Delete My Account (not functional)</Link>  </button>
-    </div>
+    <main className="form-signin w-100 m-auto">
+        {/* <div className="greeting">Welcome to your profile page</div> */}
+        <div className="profile-picture"></div>
+
+        <div className ="greeting">
+        <h1> {name ? "Hi " + name + "!": "You are not logged in"}</h1> 
+
+        <p> {email ? "Email: " + email : "your email is amanda@gmail.com"}</p>
+        
+        <button className= "btn-primary"> <Link to="/feed" className="nav-link" >Go back to Feed</Link>  </button>
+        <button className= "btn-primary mt-2"> Delete My Account (not functional)  </button>
+        </div>
+    </main>
    
 );
 };

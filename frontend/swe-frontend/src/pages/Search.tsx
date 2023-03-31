@@ -2,6 +2,7 @@ import React, { useEffect, SyntheticEvent, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Form, InputGroup, FormControl, Button, Row, Card} from 'react-bootstrap';
 import {Link} from "react-router-dom";
+import "../components/Scroll.css"
 
 const CLIENT_ID = "d2db8ba7df624158987b5068d737afd7";
 const CLIENT_SECRET = "3a1c96cb492f4750aa714c23b587e5b6";
@@ -74,30 +75,9 @@ const Search = () => {
                 'Authorization': 'Bearer ' + accessToken
             }
         }
-
-        
-
-        // for albums
-        
-        /*
-        var artistID = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', searchParameters)
-            .then(response => response.json())
-            .then(data => { return data.artists.items[0].id})
-
-        console.log("Artist ID is " + artistID);   
-
-        // Get request with Artist ID to grab all the albums from that artist
-        // do include_groups=album,single for individual songs as well
-        var returnedAlbums = await fetch('https://api.spotify.com/v1/artists/' + artistID + '/albums' + '?include_groups=album,single&market=US&limit=50&include_external=audio', searchParameters)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                setAlbums(data.items);
-            });
-            */
             
-
         // searches for songs, as well as artist secondhandedly   
+        console.log('https://api.spotify.com/v1/search?q=' + searchInput + '&type=track&market=US&limit=48&include_external=audio', searchParameters);
         var trackID = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=track&market=US&limit=48&include_external=audio', searchParameters)
             .then(response => response.json())
             .then(data => { 
@@ -107,7 +87,13 @@ const Search = () => {
             })
     }
 
-
+    function noAlbums() {
+        console.log(albums.length);
+        if (albums.length == 0)
+            return true;
+        else
+            return false;    
+     }
 
     console.log(albums);
     return (
@@ -121,6 +107,7 @@ const Search = () => {
         </div>
         
         <Container>
+        <main className="form-signin w-100 m-auto">
             <InputGroup className= "mb-3" size="lg">
                 <Form.Control 
                     placeholder = "Search Songs/Artists"
@@ -131,28 +118,35 @@ const Search = () => {
                         }
                     }}
                     onChange={event => {
+                        // console.log('event: ' + event.target.value);
+                        // var s = String(event.target.value);
                         setSearchInput(event.target.value);
-                        console.log('input: ' + searchInput);
+                        // console.log('input: ' + searchInput);
                         search();
                     }
                     }
                     />
                 <Button onClick ={search}>Search</Button>
             </InputGroup>
+            
             <Link to="/feed">
              <button className="w-100 btn btn-lg btn-primary my-2" onClick={handleClick}>Submit Song</button>
             </Link>  
+        </main>
         </Container>
-        <div className='searchResults'>   
+
+
+        <div className='searchResults'>
         <Container className= "cards">
-            <Row className="mx-1 row gx-0 row-cols-6 my-5">
+            <div className ="searchResultsMessage"> <div className="my-5">{noAlbums() ? "Start typing to see some songs!" : ""} </div> </div>
+            <Row className="mx-1 row gx-0 row-cols-4 my-5">
                 {albums.map( (song, i) => {
-                    console.log('song: ' + song);
+                    console.log('song: ' + song)
                     return (
-                        <Card>
+                        <Card className = "mx-0">
                             <Card.Img src={song.album.images[0].url} />
                             <Card.Body className = "mx-0">
-                                <Card.Title className= "gx-1"><h6>{song.name}</h6></Card.Title>
+                                <Card.Text className= "gx-1"><div className="cardTitle">{song.name}</div></Card.Text>
                                 <Card.Text className = "gx-5">{song.artists[0].name}</Card.Text>
                             </Card.Body>
                         </Card>
@@ -161,13 +155,7 @@ const Search = () => {
             </Row>
         </Container>
         </div>
-        
-        
-        
-
-        
     </div>
-    
      );
  };
 
