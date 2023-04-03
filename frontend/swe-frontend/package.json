@@ -35,9 +35,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    
-  },
+  "eslintConfig": {},
   "eslintIgnore": [
     "node_modules",
     "build/*"
@@ -57,6 +55,6 @@
   "devDependencies": {
     "@types/react-dom": "^18.0.10",
     "@types/spotify-web-api-node": "^5.0.7",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^2.1.3"
   }
 }
