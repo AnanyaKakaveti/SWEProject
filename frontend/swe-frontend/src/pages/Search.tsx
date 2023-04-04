@@ -1,14 +1,12 @@
 import React, { useEffect, SyntheticEvent, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container, Form, InputGroup, FormControl, Button, Row, Card} from 'react-bootstrap';
+import {Container, Form, InputGroup, FormControl, Button, Row, Card, Modal} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import "../components/Scroll.css"
 
 const CLIENT_ID = "d2db8ba7df624158987b5068d737afd7";
 const CLIENT_SECRET = "3a1c96cb492f4750aa714c23b587e5b6";
-const randomID = "2aPTvyE09vUCRwVvj0I8WK";
-
-
+var randomID = "2aPTvyE09vUCRwVvj0I8WK";
 
 
 const Search = () => {
@@ -16,6 +14,10 @@ const Search = () => {
     var [email, setEmail] = useState('');
     // const [password, setPassword] = useState('');
     var [song, setSongID] = useState('');
+
+    const [showModal, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const handleClick = () => {
         
@@ -95,6 +97,13 @@ const Search = () => {
             return false;    
      }
 
+     
+    function selected() {
+        // randomID = id;
+        // console.log("new id is " + randomID);
+        handleShow()
+    }
+
     console.log(albums);
     return (
 
@@ -130,7 +139,7 @@ const Search = () => {
             </InputGroup>
             
             <Link to="/feed">
-             <button className="w-100 btn btn-lg btn-primary my-2" onClick={handleClick}>Submit Song</button>
+             <button className="w-100 btn btn-lg btn-primary my-2">Submit Song</button>
             </Link>  
         </main>
         </Container>
@@ -143,13 +152,35 @@ const Search = () => {
                 {albums.map( (song, i) => {
                     console.log('song: ' + song)
                     return (
-                        <Card className = "mx-0">
+                        <>
+                        
+                        
+                        <Card className = "mx-0" onClick={selected}>
+                            {/* <button type="button" className="cardClicked" data-toggle="button" aria-pressed="false">Single toggle</button> */}
+                        <div>
+                            <Modal show={showModal} onHide={handleClose}>
+                               
+                                <Modal.Body>Are you sure you want to pick this song?</Modal.Body>
+                                <Card.Img width= "150px" height= "auto" src={song.album.images[0].url} />
+                                <Card.Body className = "mx-0">
+                                    <Card.Title className= "gx-1"><div className="cardTitle">{song.name}</div></Card.Title>
+                                    <Card.Text className = "gx-5">{song.artists[0].name}</Card.Text>
+                                </Card.Body>
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={handleClose}>Close</Button>
+                                </Modal.Footer>
+                            </Modal>
+                            
+                        </div>    
                             <Card.Img src={song.album.images[0].url} />
                             <Card.Body className = "mx-0">
                                 <Card.Text className= "gx-1"><div className="cardTitle">{song.name}</div></Card.Text>
                                 <Card.Text className = "gx-5">{song.artists[0].name}</Card.Text>
                             </Card.Body>
+                                
+                            
                         </Card>
+                        </>
                     )
                 })}
             </Row>
@@ -159,4 +190,7 @@ const Search = () => {
      );
  };
 
+
+
 export default Search;
+
