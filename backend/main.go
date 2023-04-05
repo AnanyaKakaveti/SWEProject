@@ -297,5 +297,5 @@ func main() {
 
 	Setup(app)
 
-	app.Listen(":8000")
+	app.Listen("localhost:8000")
 }
