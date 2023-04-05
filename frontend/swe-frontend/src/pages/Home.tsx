@@ -88,7 +88,7 @@ const Home: React.FC = () => {
                         <div className = "scroll-text">
                             
                             <div className="overflow-hidden text-nowrap d-inline">s
-                                {homeSongs.map( (song, i) => {
+                                {homeSongs?.map( (song, i) => {
                                     
                                 return(
                                     <img className="mx-1 my-5" width= "150px" height= "auto" key= {i} src={song.album.images[1].url}></img>
