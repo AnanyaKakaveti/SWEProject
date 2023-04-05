@@ -52,8 +52,9 @@ const Home: React.FC = () => {
         // input = "0V3wPSX9ygBnCm8psDIegu,1zi7xx7UVEFkmKfv06H8x0";
 
         // searches for songs, as well as artist secondhandedly   
-        console.log('https://api.spotify.com/v1/tracks/?ids=' + input + '&market=US', searchParameters);
-        var trackID = await fetch('https://api.spotify.com/v1/tracks/?ids=' + input + '&market=US', searchParameters)
+        // need to get rid of question mark and run again
+        console.log('https://api.spotify.com/v1/tracks?ids=' + input + '&market=US', searchParameters);
+        var trackID = await fetch('https://api.spotify.com/v1/tracks?ids=' + input + '&market=US', searchParameters)
             .then(response => response.json())
             .then(data => { 
                 console.log(data);
