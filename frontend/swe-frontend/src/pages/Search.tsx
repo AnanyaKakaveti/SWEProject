@@ -31,7 +31,7 @@ const Search = () => {
         });
 };
 
-    const [searchInput, setSearchInput] = useState("");
+    // const [searchInput, setSearchInput] = useState(" ");
     const [accessToken, setAccessToken] = useState("");
     const [albums, setAlbums] = useState<any[]>([]);
 
@@ -64,7 +64,7 @@ const Search = () => {
     }, [])
 
     // Search
-    async function search() {
+    async function search(searchInput: string | undefined) {
         console.log("Search for " + searchInput);
 
         // Get request using search to get Artist ID
@@ -112,21 +112,16 @@ const Search = () => {
                 <Form.Control 
                     placeholder = "Search Songs/Artists"
                     type="input"
-                    onKeyPress={event => {
-                        if (event.key ==="Enter") {
-                            search();
-                        }
-                    }}
                     onChange={event => {
-                        // console.log('event: ' + event.target.value);
+                        console.log('event: ' + event.target.value);
                         // var s = String(event.target.value);
-                        setSearchInput(event.target.value);
+                        // setSearchInput(event.target.value);
                         // console.log('input: ' + searchInput);
-                        search();
+                        search(event.target.value);
                     }
                     }
                     />
-                <Button onClick ={search}>Search</Button>
+                {/* <Button onClick ={search}>Search</Button> */}
             </InputGroup>
             
             <Link to="/feed">
@@ -140,7 +135,7 @@ const Search = () => {
         <Container className= "cards">
             <div className ="searchResultsMessage"> <div className="my-5">{noAlbums() ? "Start typing to see some songs!" : ""} </div> </div>
             <Row className="mx-1 row gx-0 row-cols-4 my-5">
-                {albums.map( (song, i) => {
+                {albums?.map( (song, i) => {
                     console.log('song: ' + song)
                     return (
                         <Card className = "mx-0">
