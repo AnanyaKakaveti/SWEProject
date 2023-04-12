@@ -34,9 +34,14 @@ const Search = () => {
     // const [searchInput, setSearchInput] = useState(" ");
     const [accessToken, setAccessToken] = useState("");
     const [albums, setAlbums] = useState<any[]>([]);
+    const [triggered, setTriggered] = useState(false);
+    
+
 
     useEffect(() => {
+        
         (
+            
             async () => {
                 const reponse = await fetch('http://localhost:8000/api/user', {
                     headers: {'Content-Type' : 'application/json'}, 
@@ -47,7 +52,10 @@ const Search = () => {
                 setName(content.name);
                 setEmail(content.Email);
                 // setPassword(content.password);
+                
+                
             }
+            
         )();
 
 
@@ -95,10 +103,18 @@ const Search = () => {
             return false;    
      }
 
+    function checkTrigger() {
+        if (triggered == false) {
+            window.location.href = window.location.href;
+            setTriggered(true);
+        }
+    }
+
     console.log(albums);
     return (
 
     <div>
+        <script onLoad={checkTrigger}></script>
         <h1 className="text" >Daily Song Picker</h1>
 
         {/* <input type="name" className="form-control" id="floatingInput" placeholder="Search song" required/> */}
@@ -136,13 +152,16 @@ const Search = () => {
             <div className ="searchResultsMessage"> <div className="my-5">{noAlbums() ? "Start typing to see some songs!" : ""} </div> </div>
             <Row className="mx-1 row gx-0 row-cols-4 my-5">
                 {albums?.map( (song, i) => {
-                    console.log('song: ' + song)
+                    if (song == null) {
+                        return;
+                    }
+                    // console.log('song: ' + song)
                     return (
                         <Card className = "mx-0">
-                            <Card.Img src={song.album.images[0].url} />
+                            <Card.Img src={song?.album?.images[0]?.url} />
                             <Card.Body className = "mx-0">
                                 <Card.Text className= "gx-1"><div className="cardTitle">{song.name}</div></Card.Text>
-                                <Card.Text className = "gx-5">{song.artists[0].name}</Card.Text>
+                                <Card.Text className = "gx-5">{song?.artists[0]?.name}</Card.Text>
                             </Card.Body>
                         </Card>
                     )
@@ -150,6 +169,7 @@ const Search = () => {
             </Row>
         </Container>
         </div>
+        
     </div>
      );
  };

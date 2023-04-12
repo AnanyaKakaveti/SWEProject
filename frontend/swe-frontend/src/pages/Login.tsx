@@ -24,8 +24,13 @@ const Login = () => {
     setRedirect(true);
   }
 
-  if(redirect)
-  return <Navigate to= "/search"/>;
+  // function refreshPage() {
+  //   window.location.reload(false);
+  // }
+
+  if(redirect) {
+    return <Navigate to= "/search"/>;
+  }
   
   return (
     <main className="form-signin w-100 m-auto">
