@@ -24,8 +24,13 @@ const Login = () => {
     setRedirect(true);
   }
 
-  if(redirect)
-  return <Navigate to= "/search"/>;
+  // function refreshPage() {
+  //   window.location.reload(false);
+  // }
+
+  if(redirect) {
+    return <Navigate to= "/search"/>;
+  }
   
   return (
     <main className="form-signin w-100 m-auto">
@@ -40,6 +45,7 @@ const Login = () => {
               onChange = {e=>setPassword(e.target.value)}
             />
         
+          
           <button className="btn-primary" type="submit">Sign In</button>
           {/* <p className="mt-5 mb-3 text-muted">&copy; 2023</p> */}
         </form>

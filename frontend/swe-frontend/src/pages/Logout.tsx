@@ -34,8 +34,9 @@ return(
             <h1>Are you sure you want to logout?</h1> 
             <p> {name ? "Name: " + name : "You are not logged in"}</p>
             <p> {email ? "Email: " + email : "You don''t have a registered email"}</p>
-            
+            <Link to = "/login"> 
             <button className= "btn-primary" onClick = {logout}> Yes, Logout </button>
+            </Link>
             <button className= "btn-primary my-2"> <Link to="/feed" className="nav-link" >Go back to Feed</Link>  </button>
         </div>
     </main>
