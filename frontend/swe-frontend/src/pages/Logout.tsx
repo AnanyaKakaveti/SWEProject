@@ -20,6 +20,14 @@ export const Logout = () => {
         )();
     });
 
+    const logout = async () => {
+        await fetch('http://localhost:8000/api/logout', {
+                method: 'POST',
+                headers: {'Content-Type' : 'application/json'}, 
+                credentials : 'include',
+            });
+    }
+
 return(
     <main className="form-signin w-100 m-auto">
         <div className ="greeting">
@@ -27,12 +35,14 @@ return(
             <p> {name ? "Name: " + name : "You are not logged in"}</p>
             <p> {email ? "Email: " + email : "You don''t have a registered email"}</p>
             
-            <button className= "btn-primary"> Yes, Logout </button>
+            <button className= "btn-primary" onClick = {logout}> Yes, Logout </button>
             <button className= "btn-primary my-2"> <Link to="/feed" className="nav-link" >Go back to Feed</Link>  </button>
         </div>
     </main>
    
 );
 };
+
+
 
 export default Logout;

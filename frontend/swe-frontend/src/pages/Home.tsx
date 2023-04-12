@@ -56,7 +56,7 @@ const Home: React.FC = () => {
         console.log('https://api.spotify.com/v1/tracks?ids=' + input + '&market=US', searchParameters);
         var trackID = await fetch('https://api.spotify.com/v1/tracks?ids=' + input + '&market=US', searchParameters)
             .then(response => response.json())
-            .then(data => { 
+            .then(data => {  
                 console.log(data);
                 console.log(data.tracks);
                 setHomeSongs(data.tracks);
