@@ -42,6 +42,9 @@ body {
   overflow: hidden;
   flex: auto;
   background: black;
+  position: relative;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 70%);
+  
 }
 
 .scroll-text::before,
@@ -49,6 +52,7 @@ body {
   background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0), 100%);
   width: 15%;
   height: 100%;
+  
 }
 
 @keyframes scroll-left {
@@ -62,11 +66,12 @@ body {
 
 @keyframes scroll-right {
   from {
-    transform: translateX(-50%);
+    transform: translateX(-75%);
   }
   to {
-    transform: translateX(0%);
+    transform: translateX(-25%);
   }
+  
 }
 
 .scroll-text {
@@ -81,30 +86,47 @@ body {
   white-space: nowrap;
   /* animation: my-animation 10s linear infinite */
   margin-bottom: 0px;
-  margin-top: 0px;
+  margin-top: 5px;
   padding-top: 0%;
   padding-bottom: 0%;
-  
-
 } 
+
   
 
 .pictures1 {
   padding-top: 0%;
   padding-bottom: 0%;
   height: fit-content;
-  animation: scroll-left 15s linear infinite;
+  animation: scroll-left 60s linear infinite;
   overflow: hidden;
   display: inline-block;
+
 }
 .pictures2 {
   padding-top: 0%;
   height: fit-content;
-  animation: scroll-right 15s linear infinite;
+  animation: scroll-right 60s linear infinite;
   overflow: hidden;
   display: inline-block;
 }
 
+.scroll-text img {
+  opacity: 0.7;
+}
+.scroll-text img:hover {
+  opacity: 1.0;
+}
+
+.overlay {
+  content: ' ';
+  z-index: 10;
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  top: 0;
+  left: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.9) 0%, white 100%);
+}
 
 .artists{
   color: white;
@@ -178,7 +200,6 @@ body {
   margin-left: 10px;
   font-size: 1.5vw;
   padding-left: 1.5;
-  
 }
 
 .cardTitle {
@@ -187,6 +208,24 @@ body {
   white-space:nowrap;
   overflow-x: hidden;
 }
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Modal-img {
+  width: 75%;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: block;
+  
+}
+
 
 .form-signin {
   max-width: 330px;
@@ -227,7 +266,15 @@ body {
   width: 100%;
   background-color:black; 
   left: 0;
-  
+  align-items: center;
+  justify-content: center;
+}
+
+.feed2 {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
 }
 
 .container-fluid{
@@ -249,9 +296,10 @@ body {
 .btn-primary:hover {
   background-color: white;
   border-color: rgb(23, 10, 43);
+  color: black;
 }
 
-.card:hover{
+.cards .card:hover{
 border-width: 10px;
 border-color:rgb(64, 12, 169);
 }
