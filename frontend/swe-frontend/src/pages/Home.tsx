@@ -135,9 +135,10 @@ const Home: React.FC = () => {
 
         <div></div>
         <div className = "slider">
+            <div className="overlay"></div> 
             <div className = "scroll-text">  
                 <div className="pictures1">
-                    {homeSongs?.map( (song, i) => { 
+                    {homeSongs?.map( (song, i) => {
                         console.log(input);
                         if (song == null)
                             return;
@@ -157,10 +158,10 @@ const Home: React.FC = () => {
                             <img className="mx-1 my-5" width= "125px" height= "auto" key= {i} src={song?.album?.images[1]?.url}></img>
                         )})}
                 </div>
-                            
+                      
             </div>
+              
         </div>
-        <script>{}</script>
           
 
                         

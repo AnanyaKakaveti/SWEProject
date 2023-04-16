@@ -1,13 +1,14 @@
 import React, { useEffect, SyntheticEvent, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container, Form, InputGroup, FormControl, Button, Row, Card} from 'react-bootstrap';
+import {Container, Form, InputGroup, FormControl, Button, Row, Card, Modal} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import "../components/Scroll.css"
 
 const CLIENT_ID = "d2db8ba7df624158987b5068d737afd7";
 const CLIENT_SECRET = "3a1c96cb492f4750aa714c23b587e5b6";
-const randomID = "2aPTvyE09vUCRwVvj0I8WK";
+var randomID = "2aPTvyE09vUCRwVvj0I8WK";
 
+var popup = false;
 
 
 
@@ -16,6 +17,10 @@ const Search = () => {
     var [email, setEmail] = useState('');
     // const [password, setPassword] = useState('');
     var [song, setSongID] = useState('');
+
+    const [songS, setSongS] = useState({});
+    const [modalOpen, setModalOpen] = useState(false);
+    
 
     const handleClick = () => {
         
@@ -39,7 +44,7 @@ const Search = () => {
 
 
     useEffect(() => {
-            setTriggered(false);
+        
         (
             
             async () => {
@@ -52,10 +57,8 @@ const Search = () => {
                 setName(content.name);
                 setEmail(content.Email);
                 // setPassword(content.password);
-                
-                
+   
             }
-            
         )();
 
 
@@ -72,7 +75,6 @@ const Search = () => {
     }, [])
 
     // Search
-    
     async function search(searchInput: string | undefined) {
         console.log("Search for " + searchInput);
 
@@ -105,12 +107,29 @@ const Search = () => {
      }
 
     function checkTrigger() {
-        if (triggered === false) {
-            // window.location.href = window.location.href;
-            window.location.reload();
-            location.reload();
+        if (triggered == false) {
+            window.location.href = window.location.href;
+            setTriggered(true);
         }
     }
+
+    function closePopup() {
+        popup = false;
+        setModalOpen(false);
+        console.log("updated");
+    }
+
+    function clickedSong(s: any) {
+        setSongS(s);
+        setSongID(s?.id);
+        randomID = (s?.id);
+        console.log(randomID);
+        popup = true;
+        setModalOpen(true);
+        console.log("popup is set to true");
+        console.log(modalOpen);
+    }
+    
 
     console.log(albums);
     return (
@@ -126,7 +145,7 @@ const Search = () => {
         
         <Container>
         <main className="form-signin w-100 m-auto">
-            <InputGroup className= "mb-3" size="lg">
+            <InputGroup className= "my-5" size="lg">
                 <Form.Control 
                     placeholder = "Search Songs/Artists"
                     type="input"
@@ -142,12 +161,11 @@ const Search = () => {
                 {/* <Button onClick ={search}>Search</Button> */}
             </InputGroup>
             
-            <Link to="/feed">
+            {/* <Link to="/feed">
              <button className="w-100 btn btn-lg btn-primary my-2" onClick={handleClick}>Submit Song</button>
-            </Link>  
+            </Link>   */}
         </main>
         </Container>
-
 
         <div className='searchResults'>
         <Container className= "cards">
@@ -159,7 +177,12 @@ const Search = () => {
                     }
                     // console.log('song: ' + song)
                     return (
-                        <Card className = "mx-0">
+                        <Card className = "mx-0" onClick={event => {
+                            clickedSong(song);
+                            // if (songS != undefined)
+                            //     console.log(songS);
+                            
+                        }}>
                             <Card.Img src={song?.album?.images[0]?.url} />
                             <Card.Body className = "mx-0">
                                 <Card.Text className= "gx-1"><div className="cardTitle">{song.name}</div></Card.Text>
@@ -172,8 +195,31 @@ const Search = () => {
         </Container>
         </div>
         
+        <Modal className="modal" show={modalOpen}>
+            <Modal.Header  closeButton onClick={closePopup}></Modal.Header>
+            <Modal.Title className="mx-auto mt-1">Are you sure you want to pick this song?</Modal.Title>
+            <div className="justify-content-md-center" >
+                <img className="mx-auto d-block mt-3" src={(songS as any)?.album?.images[1]?.url}></img>
+            </div>
+            <Modal.Body className="mx-auto d-block mt-1">{modalOpen ? (songS as any)?.name + " - " + ((songS as any)?.artists as any)[0]?.name : ""}</Modal.Body>
+            <div className="modal-body">
+                <form>
+                <div className="form-group">
+                    <label className="col-form-label">Caption:</label>
+                    <textarea className="form-control" id="message-text"></textarea>
+                </div>
+                </form>
+            </div>
+            <Modal.Footer>
+                <Link to="/feed">
+                <button className="w-10 btn-lg rounded btn-primary my-2" onClick={handleClick}>Submit</button>
+                </Link> 
+            </Modal.Footer>
+        </Modal>
     </div>
      );
  };
+
+ 
 
 export default Search;

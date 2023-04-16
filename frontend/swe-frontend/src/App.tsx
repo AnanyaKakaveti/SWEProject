@@ -45,7 +45,7 @@ return(
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Reg/>} />
             <Route path="/search" element={<Search/>} />
-            <Route path="/feed" element={<Feed/>} />
+            <Route path="/feed" element={<Feed name = "name" song="song"/>} />
             <Route path="/profile" element={<Profile name = "name" email="email" />} />
             <Route path="/logout" element={<Logout/>} />
         </Routes>
