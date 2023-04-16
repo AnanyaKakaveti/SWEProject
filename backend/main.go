@@ -84,6 +84,7 @@ type User struct {
 
 type Post struct {
 	Email   string `json: "email" gorm: "unique"`
+	Name    string `json:"name"`
 	Song    string `json: "song"`
 	Caption string `json: "caption`
 }
@@ -135,19 +136,20 @@ func Register(c *fiber.Ctx) error {
 	//return c.SendString("Hello, World 👋!")
 }
 
-var postArr [1000][3]string
+var postArr [1000][4]string
 var count int = 0
 
 func Posts(c *fiber.Ctx) error {
 	var data map[string]string
 	// var postArr [1000][3] string
-	var arr [3]string
+	var arr [4]string
 	if err := c.BodyParser(&data); err != nil {
 		return err
 	}
 
 	post := Post{
 		Email:   data["email"],
+		Name:    data["name"],
 		Song:    data["song"],
 		Caption: data["caption"],
 		// Song: 		data["song"],
@@ -156,8 +158,9 @@ func Posts(c *fiber.Ctx) error {
 	DB.Create(&post)
 
 	arr[0] = post.Email
-	arr[1] = post.Song
-	arr[2] = post.Caption
+	arr[1] = post.Name
+	arr[2] = post.Song
+	arr[3] = post.Caption
 	postArr[count] = arr
 	count++
 

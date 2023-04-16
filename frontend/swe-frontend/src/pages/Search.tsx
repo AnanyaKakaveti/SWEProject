@@ -32,6 +32,7 @@ const Search = () => {
             headers: {'Content-Type' : 'application/json'}, 
             body: JSON.stringify({
                 email,
+                name,
                 song,
                 caption,
             })
