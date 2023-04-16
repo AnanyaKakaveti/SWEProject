@@ -23,6 +23,7 @@ export const Feed = (props: UserProps) => {
 
             const content = await reponse.json();
             setName(content.name);
+            setSong(content.songS);
         }
     )();
 });
