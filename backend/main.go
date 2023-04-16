@@ -85,6 +85,7 @@ type User struct {
 type Post struct {
 	Email 		string `json: "email" gorm: "unique"`
 	Song		string `json: "song"`
+	Caption		string `json: "caption`
 }
 
 func setupRoutes() {
@@ -148,6 +149,7 @@ func Posts(c *fiber.Ctx) error {
 	post := Post {
 		Email: 		data["email"],
 		Song: 		data["song"],
+		Caption: 	data["caption"],
 		// Song: 		data["song"],
 	}
 	

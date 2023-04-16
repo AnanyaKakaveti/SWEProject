@@ -3,7 +3,7 @@ import Typed from 'react-typed';
 import {Row} from 'react-bootstrap';
 
 
-const Home: React.FC = () => {
+const Home: React.FC = () => { 
     const CLIENT_ID = "d2db8ba7df624158987b5068d737afd7";
     const CLIENT_SECRET = "3a1c96cb492f4750aa714c23b587e5b6";
 

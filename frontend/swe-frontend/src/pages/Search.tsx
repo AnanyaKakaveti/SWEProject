@@ -20,6 +20,7 @@ const Search = () => {
 
     const [songS, setSongS] = useState({});
     const [modalOpen, setModalOpen] = useState(false);
+    const [caption, setCaption] = useState('');
     
 
     const handleClick = () => {
@@ -32,6 +33,7 @@ const Search = () => {
             body: JSON.stringify({
                 email,
                 song,
+                caption,
             })
         });
 };
@@ -206,7 +208,11 @@ const Search = () => {
                 <form>
                 <div className="form-group">
                     <label className="col-form-label">Caption:</label>
-                    <textarea className="form-control" id="message-text"></textarea>
+                    {/* <textarea className="form-control" id="message-text">
+                    onChange = {e => setName(e.target.value)}
+                    </textarea> */}
+                     <input type="caption" className="form-control"
+                            onChange = {e => setCaption(e.target.value)}/>
                 </div>
                 </form>
             </div>
