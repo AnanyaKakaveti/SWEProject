@@ -1,5 +1,7 @@
 import react, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
+import axios from 'axios';
+import { AnyAaaaRecord } from 'dns';
 
 
 type ProfileProps = {
@@ -9,6 +11,7 @@ type ProfileProps = {
 export const Profile = (props: ProfileProps) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const[pass, setPass] = useState('');
     useEffect(() => {
         (
             async () => {
@@ -35,7 +38,7 @@ return(
         <p> {email ? "Email: " + email : "your email is amanda@gmail.com"}</p>
         
         <button className= "btn-primary"> <Link to="/feed" className="nav-link" >Go back to Feed</Link>  </button>
-        <button className= "btn-primary mt-2"> Delete My Account (not functional)  </button>
+        <button className= "btn-primary mt-2"  > Delete My Account (not functional)  </button>
         </div>
     </main>
    
