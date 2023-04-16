@@ -1,14 +1,16 @@
 import react, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
+import axios from 'axios'
 
 
 type ProfileProps = {
     name: string
     email: string
 }
+
 export const Profile = (props: ProfileProps) => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    var [name, setName] = useState('');
+    var [email, setEmail] = useState('');
     useEffect(() => {
         (
             async () => {
@@ -24,6 +26,24 @@ export const Profile = (props: ProfileProps) => {
         )();
     });
 
+
+    const deleteRow = async (email: string) => {
+        // console.log(email)
+        const response = await fetch(`http://localhost:8000/api/deleteuser/${email}`, {
+            method: 'DELETE', 
+            headers: {'Content-Type' : 'application/json'}, 
+            credentials : 'include',
+          })
+            .then((response) => {
+              // Handle successful response
+              console.log("user deleted")
+            })
+            .catch((error) => {
+              // Handle error response
+              console.log("deletion unsuccessful", error)
+            });
+      };
+
 return(
     <main className="form-signin w-100 m-auto">
         {/* <div className="greeting">Welcome to your profile page</div> */}
@@ -35,7 +55,8 @@ return(
         <p> {email ? "Email: " + email : "your email is amanda@gmail.com"}</p>
         
         <button className= "btn-primary"> <Link to="/feed" className="nav-link" >Go back to Feed</Link>  </button>
-        <button className= "btn-primary mt-2"> Delete My Account (not functional)  </button>
+        <button className= "btn-primary mt-2" onClick = {() => deleteRow(email)}> Delete My Account</button>
+
         </div>
     </main>
    
