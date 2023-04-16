@@ -259,6 +259,39 @@ func Logout(c *fiber.Ctx) error {
 
 }
 
+func DeleteUser(c *fiber.Ctx) error{
+	email := c.Params("email")
+	// cookie := c.Cookies("jwt")
+
+	// token, err := jwt.ParseWithClaims(cookie, &jwt.StandardClaims{}, func(token *jwt.Token) (interface {}, error) {
+	// 	return []byte(SecretKey), nil
+	// })
+
+	// if err !=nil {
+	// 	c.Status(fiber.StatusUnauthorized)
+	// 	return c.JSON(fiber.Map {
+	// 		"message" : "unauthenticated",
+	// 	})
+	// }
+	// claims := token.Claims.(*jwt.StandardClaims)
+	// var user User 
+	// DB.Where("id = ?", claims.Issuer).First(&user)
+
+	var user User
+	if err := DB.Where("email = ?", email).First(&user).Error; err != nil {
+	  return err
+	}
+  
+	// Delete the user
+	if err := DB.Delete(&user).Error; err != nil {
+	  return err
+	}
+	
+	return c.JSON(fiber.Map{
+		"message" : "success",
+	})
+}
+
 // func Song(c *fiber.Ctx) error {
 // 	var data map[string]string
 
@@ -278,6 +311,7 @@ func Setup(app *fiber.App) {
 	app.Get("/api/user" , Users)
 	app.Post("/api/logout", Logout)
 	app.Post("/api/feed" , Posts)
+	app.Delete("/api/deleteuser/:email", DeleteUser)
 }
 
 
