@@ -3,6 +3,8 @@ import React, {SyntheticEvent, useState} from 'react';
 import { Navigate } from 'react-router-dom';
 
 const Login = () => {
+
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
@@ -43,7 +45,6 @@ const Login = () => {
     else {
       setRedirect(true)
       setLog(false);
-      
     } 
     // name ? setRedirect(true) : setRedirect(false)
   }
@@ -71,6 +72,7 @@ const Login = () => {
         
           
           <button className="btn-primary" type="submit">Sign In</button>
+          
           {/* <p className="mt-5 mb-3 text-muted">&copy; 2023</p> */}
         </form>
         <div> {log && 
