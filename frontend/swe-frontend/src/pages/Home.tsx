@@ -115,7 +115,7 @@ const Home: React.FC = () => {
 
     return (
     <>
-        <div className="form-signin w-100 m-auto">
+        <div className="form-signin w-100 m-auto mt-5">
             <div className="style">JAM.</div>  
             <div className= 'flex justify-center items-center'>
                 <p className="slogan">

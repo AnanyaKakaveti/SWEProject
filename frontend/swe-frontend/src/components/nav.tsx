@@ -119,13 +119,13 @@ export default Nav;
 const LoggedOut = () => {
   return (
     
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <nav className="navbar navbar-expand-md navbar-dark mb-4" >
       <div className="container-fluid">
         <Link to ="/" className="navbar-brand">JAM.</Link>
         <div>
           
           <ul className="navbar-nav me-auto mb-2 mb-md-0">
-            <li className="nav-item active">
+            <li className="nav-item active" >
               <Link to="/login" className="nav-link" aria-current="page">Login</Link>
             </li>
             <li className="nav-item active">
@@ -151,17 +151,17 @@ const LoggedOut = () => {
 
 const LoggedIn: React.FC <NavProps2> = ({name}) => {
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <nav className="navbar navbar-expand-md navbar-dark mb-4">
       <div className="container-fluid">
-        <Link to ="/" className="navbar-brand">JAM.</Link>
+        <Link to ="/" className="navbar-brand"><div className="logo">JAM.</div>  </Link>
         <div>
           
           <ul className="navbar-nav me-auto mb-2 mb-md-0">
-            <li className="nav-item active">
+            <li className="nav-link active">
               <Link to="/profile" className="nav-link" >{"Welcome " + name + "!"}</Link>
               
             </li>
-            <li className="nav-item active">
+            <li className="nav-link active">
                 <Link to="/logout" className="nav-link" >Logout</Link>
             </li>
             
