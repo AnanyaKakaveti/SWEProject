@@ -8,6 +8,7 @@ type UserProps = {
 }
 
 
+
 export const Feed = (props: UserProps) => {
 
   const [name, setName] = useState('');
@@ -28,6 +29,20 @@ export const Feed = (props: UserProps) => {
     )();
 });
 
+// content is the array of posts 
+useEffect(() => {
+  (
+      async () => {
+          const reponse = await fetch('http://localhost:8000/api/list', {
+              headers: {'Content-Type' : 'application/json'}, 
+              credentials : 'include',
+          });
+
+          const content = await reponse.json();
+          console.log(content); // this is the array 
+      }
+  )();
+});
     return (
     <main className="form-signin w-100 m-auto">
      <div className="feed">    
