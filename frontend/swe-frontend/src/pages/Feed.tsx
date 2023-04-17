@@ -1,17 +1,16 @@
 import react, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
-import {Container, Form, InputGroup, FormControl, Button, Row, Card, Modal} from 'react-bootstrap';
-import ListGroup from 'react-bootstrap/ListGroup';
+
 
 type UserProps = {
   name: string
   song: string
 }
 
-var popup = false;
+
 
 export const Feed = (props: UserProps) => {
-  const [modalOpen, setModalOpen] = useState(false);
+
   const [name, setName] = useState('');
   const [song, setSong] = useState('');
 
@@ -29,24 +28,21 @@ export const Feed = (props: UserProps) => {
         }
     )();
 });
-const handleClick = () =>{
-  console.log("connecting users");
-}
-function closePopup() {
-  popup = false;
-  setModalOpen(false);
-  console.log("updated");
-}
 
-function connectUsers() {
-  popup = true;
-  setModalOpen(true);
-  console.log("find Users popup is open");
-  console.log(modalOpen);
-}
-const alertClicked = () => {
-  alert('you connected with another user');
-};
+// content is the array of posts 
+useEffect(() => {
+  (
+      async () => {
+          const reponse = await fetch('http://localhost:8000/api/list', {
+              headers: {'Content-Type' : 'application/json'}, 
+              credentials : 'include',
+          });
+
+          const content = await reponse.json();
+          console.log(content); // this is the array 
+      }
+  )();
+});
     return (
     <main className="form-signin w-100 m-auto">
      <div className="feed">    
@@ -56,9 +52,6 @@ const alertClicked = () => {
       <h1 className="fw-light">Jam Feed</h1>
       <p className="lead">Wondering what your friends are listening to? Look no further</p>
       <button className="btn-primary" > <Link to="/profile" className="nav-link" >Go to Profile</Link> </button>
-      <button className="btn-primary" onClick={event => {
-                            connectUsers() }}> Conect with Friends </button>
-
     </div>
   </div>
 </section>
@@ -126,40 +119,7 @@ const alertClicked = () => {
   </div>
 </div>
 
-<Modal className="modal" show={modalOpen}>
-            <Modal.Header  closeButton onClick={closePopup}></Modal.Header>
-            <Modal.Title className="mx-auto mt-1">Get connected with friends</Modal.Title>
-            <div className="justify-content-md-center" >
-            </div>
-            <Modal.Body className="mx-auto d-block mt-1"> connect </Modal.Body>
-            <div className="modal-body">
-            <ListGroup as="ul">
-            <ListGroup.Item action onClick={alertClicked}>
-            <div className="profile-picture"></div>
-               user1
-           </ListGroup.Item>
-           <ListGroup.Item action onClick={alertClicked}>
-           <div className="profile-picture"></div>
-               user2
-           </ListGroup.Item>
-           <ListGroup.Item action onClick={alertClicked}>
-           <div className="profile-picture"></div>
-               user3
-           </ListGroup.Item>
-          </ListGroup>
-                <form>
-                <div className="form-group">
-                    <label className="col-form-label"> Message:</label>
-                    <textarea className="form-control" id="message-text"></textarea>
-                </div>
-                </form>
-            </div>
-            <Modal.Footer>
-                <Link to="/feed">
-                <button className="w-10 btn-lg rounded btn-primary my-2" onClick={closePopup}>Submit</button>
-                </Link> 
-            </Modal.Footer>
-        </Modal>
+
 </div>
 </main>
       
