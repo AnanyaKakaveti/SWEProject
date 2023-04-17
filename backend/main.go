@@ -11,6 +11,7 @@ import (
 
 	"time"
 
+	_ "github.com/go-sql-driver/mysql"
 	//"github.com/TutorialEdge/realtime-chat-go-react/database"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gofiber/fiber/v2"
@@ -83,6 +84,7 @@ type User struct {
 }
 
 type Post struct {
+	
 	Email   string `json: "email" gorm: "unique"`
 	Name    string `json:"name"`
 	Song    string `json: "song"`
@@ -136,13 +138,11 @@ func Register(c *fiber.Ctx) error {
 	//return c.SendString("Hello, World 👋!")
 }
 
-var postArr [1000][4]string
-var count int = 0
 
 func Posts(c *fiber.Ctx) error {
 	var data map[string]string
 	// var postArr [1000][3] string
-	var arr [4]string
+
 	if err := c.BodyParser(&data); err != nil {
 		return err
 	}
@@ -157,23 +157,28 @@ func Posts(c *fiber.Ctx) error {
 
 	DB.Create(&post)
 
-	arr[0] = post.Email
-	arr[1] = post.Name
-	arr[2] = post.Song
-	arr[3] = post.Caption
-	postArr[count] = arr
-	count++
-
-	
 	return c.JSON(post)
 
 	//return c.SendString("Hello, World 👋!")
 }
 
-func returnArr(c *fiber.Ctx) error {
-	return c.JSON(postArr)
 
+func getPosts(c *fiber.Ctx) error {
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	//defer DB.Close()
+
+	var posts []Post
+	err := DB.Find(&posts).Error
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return c.JSON(posts)
 }
+
+
 
 const SecretKey = "secret"
 
@@ -324,7 +329,7 @@ func Setup(app *fiber.App) {
 	app.Post("/api/logout", Logout)
 
 	app.Post("/api/feed", Posts)
-	app.Get("/api/list", returnArr)
+	app.Get("/api/list", getPosts)
 	app.Delete("/api/deleteuser/:email", DeleteUser)
 
 }
@@ -337,17 +342,7 @@ func main() {
 	Connect()
 
 	app := fiber.New()
-	// Define a route for handling delete requests
-	app.Delete("/users/delete/:email", func(c *fiber.Ctx) error {
-		email := c.Params("email")
-
-		// Delete the row from the User table
-		if err := DB.Where("email = ?", email).Delete(&User{}).Error; err != nil {
-			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
-		}
-
-		return c.JSON(fiber.Map{"message": "Row deleted successfully"})
-	})
+	
 
 	app.Use(cors.New(cors.Config{
 		AllowCredentials: true,
