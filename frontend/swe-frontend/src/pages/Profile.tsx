@@ -29,6 +29,7 @@ export const Profile = (props: ProfileProps) => {
 
     const deleteRow = async (email: string) => {
         // console.log(email)
+        // deletes row in table user
         const response = await fetch(`http://localhost:8000/api/deleteuser/${email}`, {
             method: 'DELETE', 
             headers: {'Content-Type' : 'application/json'}, 
@@ -42,6 +43,12 @@ export const Profile = (props: ProfileProps) => {
               // Handle error response
               console.log("deletion unsuccessful", error)
             });
+            // deletes cookie 
+            await fetch('http://localhost:8000/api/logout', {
+                method: 'POST',
+                headers: {'Content-Type' : 'application/json'}, 
+                credentials : 'include',
+            });
       };
 
 return(
@@ -52,10 +59,11 @@ return(
         <div className ="greeting">
         <h1> {name ? "Hi " + name + "!": "You are not logged in"}</h1> 
 
-        <p> {email ? "Email: " + email : "your email is amanda@gmail.com"}</p>
+        <p> {email ? "Email: " + email : "No email is registered"}</p>
         
         <button className= "btn-primary"> <Link to="/feed" className="nav-link" >Go back to Feed</Link>  </button>
-        <button className= "btn-primary mt-2" onClick = {() => deleteRow(email)}> Delete My Account</button>
+
+        <button className= "btn-primary mt-2" onClick = {() => deleteRow(email)}> <Link to="/home"> Delete My Account</Link></button>
 
         </div>
     </main>
