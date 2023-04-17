@@ -10,8 +10,6 @@ var randomID = "2aPTvyE09vUCRwVvj0I8WK";
 
 var popup = false;
 
-
-
 const Search = () => {
     const [name, setName] = useState('');
     var [email, setEmail] = useState('');
@@ -210,7 +208,7 @@ const Search = () => {
                     onChange = {e => setName(e.target.value)}
                     </textarea> */}
                      <input type="caption" className="form-control"
-                            onChange = {e => setCaption(e.target.value)}/>
+                       onChange = {e => setCaption(e.target.value)}/>
                 </div>
                 </form>
             </div>

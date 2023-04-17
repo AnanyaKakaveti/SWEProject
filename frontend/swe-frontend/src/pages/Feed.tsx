@@ -27,7 +27,6 @@ export const Feed = (props: UserProps) => {
                 headers: {'Content-Type' : 'application/json'}, 
                 credentials : 'include',
             });
-
             const content = await reponse.json();
             setName(content.name);
             //setSong(content.songS);
