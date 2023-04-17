@@ -83,10 +83,11 @@ type User struct {
 }
 
 type Post struct {
+	// Id       uint  `json: "id" gorm: "primaryKey"`
 	Email   string `json: "email" gorm: "unique"`
 	Name    string `json:"name"`
 	Song    string `json: "song"`
-	Caption string `json: "caption`
+	Caption string `json: "caption"`
 }
 
 func setupRoutes() {
@@ -111,6 +112,27 @@ func Connect() {
 	DB = connection
 
 	connection.AutoMigrate(&User{}, &Post{})
+}
+
+func checkPosts(c *fiber.Ctx) error{
+	email := c.Params("email")
+	// var present bool = true;
+
+	var post Post
+	//find user: error if usesr not found
+	DB.Where("email = ?", email).First(&post)
+
+	// if post.Id == 0 {
+	// 	c.Status(fiber.StatusNotFound)
+	// 	//Fiber map is a map with a stirng and an interface (can put anythin there)
+	// }
+  
+	// Delete the user
+	if err := DB.Delete(&post).Error; err != nil {
+	//   return err
+	}
+
+	return nil
 }
 
 func Register(c *fiber.Ctx) error {
@@ -139,6 +161,7 @@ func Register(c *fiber.Ctx) error {
 var postArr [1000][4]string
 var count int = 0
 
+
 func Posts(c *fiber.Ctx) error {
 	var data map[string]string
 	// var postArr [1000][3] string
@@ -163,6 +186,9 @@ func Posts(c *fiber.Ctx) error {
 	arr[3] = post.Caption
 	postArr[count] = arr
 	count++
+
+	//post will be deleted 24 hours after its creation
+	time.AfterFunc(24*time.Hour, func() { DeletePost(c, post.Email)})
 
 	return c.JSON(post)
 
@@ -273,21 +299,6 @@ func Logout(c *fiber.Ctx) error {
 
 func DeleteUser(c *fiber.Ctx) error{
 	email := c.Params("email")
-	// cookie := c.Cookies("jwt")
-
-	// token, err := jwt.ParseWithClaims(cookie, &jwt.StandardClaims{}, func(token *jwt.Token) (interface {}, error) {
-	// 	return []byte(SecretKey), nil
-	// })
-
-	// if err !=nil {
-	// 	c.Status(fiber.StatusUnauthorized)
-	// 	return c.JSON(fiber.Map {
-	// 		"message" : "unauthenticated",
-	// 	})
-	// }
-	// claims := token.Claims.(*jwt.StandardClaims)
-	// var user User 
-	// DB.Where("id = ?", claims.Issuer).First(&user)
 
 	var user User
 	if err := DB.Where("email = ?", email).First(&user).Error; err != nil {
@@ -296,6 +307,24 @@ func DeleteUser(c *fiber.Ctx) error{
   
 	// Delete the user
 	if err := DB.Delete(&user).Error; err != nil {
+	  return err
+	}
+	
+	return c.JSON(fiber.Map{
+		"message" : "success",
+	})
+}
+
+func DeletePost(c *fiber.Ctx, email string) error{
+	// email := c.Params("email")
+
+	var post Post
+	if err := DB.Where("email = ?", email).First(&post).Error; err != nil {
+	  return err
+	}
+  
+	// Delete the user
+	if err := DB.Delete(&post).Error; err != nil {
 	  return err
 	}
 	
@@ -322,7 +351,8 @@ func Setup(app *fiber.App) {
 	app.Post("/api/feed", Posts)
 	app.Get("/api/list", returnArr)
 	app.Delete("/api/deleteuser/:email", DeleteUser)
-
+	app.Get("/api/checkposts/:email", checkPosts)
+	// app.Delete("/api/deletepost/:email", DeletePost)
 }
 
 func main() {
@@ -333,17 +363,6 @@ func main() {
 	Connect()
 
 	app := fiber.New()
-	// Define a route for handling delete requests
-	app.Delete("/users/delete/:email", func(c *fiber.Ctx) error {
-		email := c.Params("email")
-
-		// Delete the row from the User table
-		if err := DB.Where("email = ?", email).Delete(&User{}).Error; err != nil {
-			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
-		}
-
-		return c.JSON(fiber.Map{"message": "Row deleted successfully"})
-	})
 
 	app.Use(cors.New(cors.Config{
 		AllowCredentials: true,
