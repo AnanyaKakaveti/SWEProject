@@ -63,7 +63,7 @@ return(
         
         <button className= "btn-primary"> <Link to="/feed" className="nav-link" >Go back to Feed</Link>  </button>
 
-        <button className= "btn-primary mt-2" onClick = {() => deleteRow(email)}> <Link to="/" className="nav-link"> Delete My Account</Link></button>
+        <button className= "btn-primary mt-2" onClick = {() => deleteRow(email)}> <Link to="/" className = "nav-link"> Delete My Account</Link></button>
 
         </div>
     </main>

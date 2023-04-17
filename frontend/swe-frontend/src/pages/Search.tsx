@@ -21,12 +21,23 @@ const Search = () => {
     const [songS, setSongS] = useState({});
     const [modalOpen, setModalOpen] = useState(false);
     const [caption, setCaption] = useState('');
+    // var [check, checkPresent] = useState(false)
     
 
-    const handleClick = () => {
+    const handleClick = async () => {
         
         song = song + randomID
         // email = name
+        const r = await fetch(`http://localhost:8000/api/checkposts/${email}`)
+        const check = await r.json();
+        if (check) {
+            const response = await fetch(`http://localhost:8000/api/deletepost/${email}`, {
+            method: 'DELETE', 
+            headers: {'Content-Type' : 'application/json'}, 
+            credentials : 'include',
+          })
+        }
+        console.log(check);
         const response = fetch('http://localhost:8000/api/feed', {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'}, 
@@ -38,6 +49,8 @@ const Search = () => {
             })
         });
 };
+
+
 
     // const [searchInput, setSearchInput] = useState(" ");
     const [accessToken, setAccessToken] = useState("");

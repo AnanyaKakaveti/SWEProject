@@ -84,11 +84,12 @@ type User struct {
 }
 
 type Post struct {
-	
+
+	Id       uint  `json: "id"`
 	Email   string `json: "email" gorm: "unique"`
 	Name    string `json:"name"`
 	Song    string `json: "song"`
-	Caption string `json: "caption`
+	Caption string `json: "caption"`
 }
 
 func setupRoutes() {
@@ -115,6 +116,37 @@ func Connect() {
 	connection.AutoMigrate(&User{}, &Post{})
 }
 
+func checkPosts(c *fiber.Ctx) error{
+	email := c.Params("email")
+	// var present bool = true;
+
+	var post Post
+	//find user: error if usesr not found
+	DB.Where("email = ?", email).First(&post)
+
+	//post not found
+	if post.Id == 0 {
+		c.Status(fiber.StatusNotFound)
+		returnBool(c, false)
+		//Fiber map is a map with a stirng and an interface (can put anythin there)
+	}
+	
+	if post.Id != 0 {
+		returnBool(c, true)
+	}
+	
+	// // Delete the user
+	// if err := DB.Delete(&post).Error; err != nil {
+	// //   return err
+	// }
+
+	return nil
+}
+
+func returnBool (c *fiber.Ctx, present bool) error{
+	return c.JSON(present)
+}
+
 func Register(c *fiber.Ctx) error {
 	var data map[string]string
 
@@ -139,6 +171,7 @@ func Register(c *fiber.Ctx) error {
 }
 
 
+
 func Posts(c *fiber.Ctx) error {
 	var data map[string]string
 	// var postArr [1000][3] string
@@ -156,6 +189,11 @@ func Posts(c *fiber.Ctx) error {
 	}
 
 	DB.Create(&post)
+
+
+
+	//post will be deleted 24 hours after its creation
+	time.AfterFunc(24*time.Hour, func() { DeletePost(c, post.Email)})
 
 	return c.JSON(post)
 
@@ -295,8 +333,9 @@ func DeleteUser(c *fiber.Ctx) error{
 	})
 }
 
-func DeletePosts(c *fiber.Ctx) error{
-	email := c.Params("email")
+
+func DeletePost(c *fiber.Ctx, email string) error{
+	// email := c.Params("email")
 
 	var post Post
 	if err := DB.Where("email = ?", email).First(&post).Error; err != nil {
@@ -312,6 +351,25 @@ func DeletePosts(c *fiber.Ctx) error{
 		"message" : "success",
 	})
 }
+
+func DeleteCheckedPost(c *fiber.Ctx) error{
+	// email := c.Params("email")
+	email := c.Params("email")
+	var post Post
+	if err := DB.Where("email = ?", email).First(&post).Error; err != nil {
+	  return err
+	}
+  
+	// Delete the user
+	if err := DB.Delete(&post).Error; err != nil {
+	  return err
+	}
+	
+	return c.JSON(fiber.Map{
+		"message" : "success",
+	})
+}
+
 
 // func Song(c *fiber.Ctx) error {
 // 	var data map[string]string
@@ -331,6 +389,8 @@ func Setup(app *fiber.App) {
 	app.Post("/api/feed", Posts)
 	app.Get("/api/list", getPosts)
 	app.Delete("/api/deleteuser/:email", DeleteUser)
+	app.Get("/api/checkposts/:email", checkPosts)
+	app.Delete("/api/deletepost/:email", DeleteCheckedPost)
 
 }
 
@@ -342,7 +402,7 @@ func main() {
 	Connect()
 
 	app := fiber.New()
-	
+
 
 	app.Use(cors.New(cors.Config{
 		AllowCredentials: true,
