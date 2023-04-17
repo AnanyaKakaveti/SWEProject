@@ -142,7 +142,7 @@ const Home: React.FC = () => {
                         console.log(input);
                         if (song == null)
                             return;
-                        return( 
+                        return(  
                             <img className="mx-1 my-5" width= "125px" height= "auto" key= {i} src={song?.album?.images[1]?.url}></img>
                         )})}
                 </div>
