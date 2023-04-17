@@ -11,7 +11,6 @@ type UserProps = {
 }
 
 var popup = false;
-var contentIndex = 0;
 
 export const Feed = (props: UserProps) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -61,9 +60,7 @@ useEffect(() => {
           });
 
           setContent(await reponse.json());
-          setSong(content[0][2].song);    
-          contentIndex = content.length;   
-          setLength(content[0].length);
+          setSong(content[2].song);    
           console.log(content); // this is the array 
       }
   )();
