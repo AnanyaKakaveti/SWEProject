@@ -43,8 +43,6 @@ const Search = () => {
     const [accessToken, setAccessToken] = useState("");
     const [albums, setAlbums] = useState<any[]>([]);
     const [triggered, setTriggered] = useState(false);
-    
-
 
     useEffect(() => {
         
@@ -63,7 +61,6 @@ const Search = () => {
    
             }
         )();
-
 
         var authParameters = {
             method: 'POST',
