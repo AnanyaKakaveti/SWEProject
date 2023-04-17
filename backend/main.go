@@ -83,7 +83,7 @@ type User struct {
 }
 
 type Post struct {
-	// Id       uint  `json: "id" gorm: "primaryKey"`
+	Id       uint  `json: "id"`
 	Email   string `json: "email" gorm: "unique"`
 	Name    string `json:"name"`
 	Song    string `json: "song"`
@@ -122,17 +122,27 @@ func checkPosts(c *fiber.Ctx) error{
 	//find user: error if usesr not found
 	DB.Where("email = ?", email).First(&post)
 
-	// if post.Id == 0 {
-	// 	c.Status(fiber.StatusNotFound)
-	// 	//Fiber map is a map with a stirng and an interface (can put anythin there)
-	// }
-  
-	// Delete the user
-	if err := DB.Delete(&post).Error; err != nil {
-	//   return err
+	//post not found
+	if post.Id == 0 {
+		c.Status(fiber.StatusNotFound)
+		returnBool(c, false)
+		//Fiber map is a map with a stirng and an interface (can put anythin there)
 	}
+	
+	if post.Id != 0 {
+		returnBool(c, true)
+	}
+	
+	// // Delete the user
+	// if err := DB.Delete(&post).Error; err != nil {
+	// //   return err
+	// }
 
 	return nil
+}
+
+func returnBool (c *fiber.Ctx, present bool) error{
+	return c.JSON(present)
 }
 
 func Register(c *fiber.Ctx) error {
@@ -333,6 +343,24 @@ func DeletePost(c *fiber.Ctx, email string) error{
 	})
 }
 
+func DeleteCheckedPost(c *fiber.Ctx) error{
+	// email := c.Params("email")
+	email := c.Params("email")
+	var post Post
+	if err := DB.Where("email = ?", email).First(&post).Error; err != nil {
+	  return err
+	}
+  
+	// Delete the user
+	if err := DB.Delete(&post).Error; err != nil {
+	  return err
+	}
+	
+	return c.JSON(fiber.Map{
+		"message" : "success",
+	})
+}
+
 // func Song(c *fiber.Ctx) error {
 // 	var data map[string]string
 
@@ -352,7 +380,8 @@ func Setup(app *fiber.App) {
 	app.Get("/api/list", returnArr)
 	app.Delete("/api/deleteuser/:email", DeleteUser)
 	app.Get("/api/checkposts/:email", checkPosts)
-	// app.Delete("/api/deletepost/:email", DeletePost)
+	app.Delete("/api/deletepost/:email", DeleteCheckedPost)
+
 }
 
 func main() {
