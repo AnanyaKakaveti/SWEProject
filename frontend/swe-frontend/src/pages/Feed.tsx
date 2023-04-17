@@ -39,7 +39,7 @@ useEffect(() => {
           });
 
           const content = await reponse.json();
-          console.log(content); 
+          console.log(content); // this is the array 
       }
   )();
 });

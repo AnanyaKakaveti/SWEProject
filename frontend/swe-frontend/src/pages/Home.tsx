@@ -16,7 +16,7 @@ const Home: React.FC = () => {
     var input = "";
 
     useEffect(() => {
-        var authParameters = {
+        var authParameters = { 
             method: 'POST',
             headers: { 
                 'Content-type': 'application/x-www-form-urlencoded'
