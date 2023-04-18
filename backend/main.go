@@ -84,12 +84,23 @@ type User struct {
 }
 
 type Post struct {
+	Email      string `json: "email" gorm: "unique"`
+	Name       string `json:"name"`
+	Song       string `json: "song"`
+	Caption    string `json: "caption`
+	SongName   string `json: "songname`
+	ArtistName string `json: "artistname`
+	SongImg    string `json: "songimage`
+}
 
-	Id       uint  `json: "id"`
-	Email   string `json: "email" gorm: "unique"`
-	Name    string `json:"name"`
-	Song    string `json: "song"`
-	Caption string `json: "caption"`
+type PersonalPost struct {
+	Email      string `json: "email" gorm: "unique"`
+	Name       string `json:"name"`
+	Song       string `json: "song"`
+	Caption    string `json: "caption`
+	SongName   string `json: "songname`
+	ArtistName string `json: "artistname`
+	SongImg    string `json: "songimage`
 }
 
 func setupRoutes() {
@@ -113,38 +124,7 @@ func Connect() {
 
 	DB = connection
 
-	connection.AutoMigrate(&User{}, &Post{})
-}
-
-func checkPosts(c *fiber.Ctx) error{
-	email := c.Params("email")
-	// var present bool = true;
-
-	var post Post
-	//find user: error if usesr not found
-	DB.Where("email = ?", email).First(&post)
-
-	//post not found
-	if post.Id == 0 {
-		c.Status(fiber.StatusNotFound)
-		returnBool(c, false)
-		//Fiber map is a map with a stirng and an interface (can put anythin there)
-	}
-	
-	if post.Id != 0 {
-		returnBool(c, true)
-	}
-	
-	// // Delete the user
-	// if err := DB.Delete(&post).Error; err != nil {
-	// //   return err
-	// }
-
-	return nil
-}
-
-func returnBool (c *fiber.Ctx, present bool) error{
-	return c.JSON(present)
+	connection.AutoMigrate(&User{}, &Post{}, &PersonalPost{})
 }
 
 func Register(c *fiber.Ctx) error {
@@ -170,10 +150,9 @@ func Register(c *fiber.Ctx) error {
 	//return c.SendString("Hello, World 👋!")
 }
 
-
-
 func Posts(c *fiber.Ctx) error {
 	var data map[string]string
+
 	// var postArr [1000][3] string
 
 	if err := c.BodyParser(&data); err != nil {
@@ -181,32 +160,51 @@ func Posts(c *fiber.Ctx) error {
 	}
 
 	post := Post{
-		Email:   data["email"],
-		Name:    data["name"],
-		Song:    data["song"],
-		Caption: data["caption"],
-		// Song: 		data["song"],
+		Email:      data["email"],
+		Name:       data["name"],
+		Song:       data["song"],
+		Caption:    data["caption"],
+		SongName:   data["songname"],
+		ArtistName: data["artistname"],
+		SongImg:    data["songimage"],
 	}
 
 	DB.Create(&post)
-
-
-
-	//post will be deleted 24 hours after its creation
-	time.AfterFunc(24*time.Hour, func() { DeletePost(c, post.Email)})
 
 	return c.JSON(post)
 
 	//return c.SendString("Hello, World 👋!")
 }
 
+func ProfilePost(c *fiber.Ctx) error {
+	var data map[string]string
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+	post := PersonalPost{
+		Email:      data["email"],
+		Name:       data["name"],
+		Song:       data["song"],
+		Caption:    data["caption"],
+		SongName:   data["songname"],
+		ArtistName: data["artistname"],
+		SongImg:    data["songimage"],
+	}
+	DB.Create(&post)
+	return c.JSON(post)
+}
+
+func getProfilePosts(c *fiber.Ctx) error {
+	var posts1 []PersonalPost
+	email := c.Params("email")
+	err := DB.Where("email = ?", email).Find(&posts1).Error
+	if err != nil {
+		log.Fatal(err)
+	}
+	return c.JSON(posts1)
+}
 
 func getPosts(c *fiber.Ctx) error {
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	//defer DB.Close()
-
 	var posts []Post
 	err := DB.Find(&posts).Error
 	if err != nil {
@@ -215,8 +213,6 @@ func getPosts(c *fiber.Ctx) error {
 
 	return c.JSON(posts)
 }
-
-
 
 const SecretKey = "secret"
 
@@ -315,61 +311,41 @@ func Logout(c *fiber.Ctx) error {
 
 }
 
-func DeleteUser(c *fiber.Ctx) error{
+func DeleteUser(c *fiber.Ctx) error {
 	email := c.Params("email")
 
 	var user User
 	if err := DB.Where("email = ?", email).First(&user).Error; err != nil {
-	  return err
+		return err
 	}
-  
+
 	// Delete the user
 	if err := DB.Delete(&user).Error; err != nil {
-	  return err
+		return err
 	}
-	
+
 	return c.JSON(fiber.Map{
-		"message" : "success",
+		"message": "success",
 	})
 }
 
-
-func DeletePost(c *fiber.Ctx, email string) error{
-	// email := c.Params("email")
-
-	var post Post
-	if err := DB.Where("email = ?", email).First(&post).Error; err != nil {
-	  return err
-	}
-  
-	// Delete the user
-	if err := DB.Delete(&post).Error; err != nil {
-	  return err
-	}
-	
-	return c.JSON(fiber.Map{
-		"message" : "success",
-	})
-}
-
-func DeleteCheckedPost(c *fiber.Ctx) error{
-	// email := c.Params("email")
+func DeletePosts(c *fiber.Ctx) error {
 	email := c.Params("email")
+
 	var post Post
 	if err := DB.Where("email = ?", email).First(&post).Error; err != nil {
-	  return err
+		return err
 	}
-  
+
 	// Delete the user
 	if err := DB.Delete(&post).Error; err != nil {
-	  return err
+		return err
 	}
-	
+
 	return c.JSON(fiber.Map{
-		"message" : "success",
+		"message": "success",
 	})
 }
-
 
 // func Song(c *fiber.Ctx) error {
 // 	var data map[string]string
@@ -387,10 +363,10 @@ func Setup(app *fiber.App) {
 	app.Post("/api/logout", Logout)
 
 	app.Post("/api/feed", Posts)
+	app.Post("api/profile", ProfilePost)
+	app.Get("api/profile_posts/:email", getProfilePosts)
 	app.Get("/api/list", getPosts)
 	app.Delete("/api/deleteuser/:email", DeleteUser)
-	app.Get("/api/checkposts/:email", checkPosts)
-	app.Delete("/api/deletepost/:email", DeleteCheckedPost)
 
 }
 
@@ -402,7 +378,6 @@ func main() {
 	Connect()
 
 	app := fiber.New()
-
 
 	app.Use(cors.New(cors.Config{
 		AllowCredentials: true,

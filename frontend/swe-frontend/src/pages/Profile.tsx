@@ -22,8 +22,28 @@ export const Profile = (props: ProfileProps) => {
                 const content = await reponse.json();
                 setName(content.name);
                 setEmail(content.Email);
+
             }
+            
         )();
+
+    });
+
+    useEffect(() => {
+        (
+            async () => {
+                console.log("email: " + email); 
+                const r = await fetch(`http://localhost:8000/api/profile_posts/${email}`,{
+                method: 'GET', 
+                headers: {'Content-Type' : 'application/json'}, 
+                credentials : 'include',
+                })
+                const c = await r.json(); 
+                console.log(c);  // array per email 
+            }
+            
+        )();
+
     });
 
 
