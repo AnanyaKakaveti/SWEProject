@@ -321,3 +321,13 @@ border-color:rgb(64, 12, 169);
   display: inline-block;
   background-size: 100%;
 }
+
+.small-profile-picture {
+  height: 30px;
+  width: 30px;
+  background-image: url(profile.jpeg);
+  border-radius: 50%;
+  display: inline-block;
+  background-size: 100%;
+  margin-right: 10px;
+}

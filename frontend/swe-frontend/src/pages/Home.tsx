@@ -7,7 +7,7 @@ const Home: React.FC = () => {
     const CLIENT_ID = "d2db8ba7df624158987b5068d737afd7";
     const CLIENT_SECRET = "3a1c96cb492f4750aa714c23b587e5b6";
 
-    const [homeSongs, setHomeSongs] = useState<any[]>([]);
+    const [homeSongs, setHomeSongs] = useState<any[]>([]); 
     const [homeSongs2, setHomeSongs2] = useState<any[]>([]);
     const [accessToken, setAccessToken] = useState("");
     // const s = ["0V3wPSX9ygBnCm8psDIegu", "6Uj1ctrBOjOas8xZXGqKk4", "1zi7xx7UVEFkmKfv06H8x0", "6CGMZijOAZvTXG21T8t6R0", "1mWdTewIgB3gtBM3TOSFhB", "7KXjTSCq5nL1LoYtL7XAwS", "5BKKy9fIJL5uM9fz1SnqyP", "65FftemJ1DbbZ45DUfHJXE", "4l0Mvzj72xxOpRrp6h8nHi", "5rb9QrpfcKFHM1EUbSIurX", "35mvY5S1H3J2QZyna3TFe0", "2K87XMYnUMqLcX3zvtAF4G", "3jpZwYrDbX2lQMhHwXjyUD", "2ENexcMEMsYk0rVJigVD3i", "21yRtB6B8EMounImAfHRCP", "7FbrGaHYVDmfr7KoLIZnQ7", "6KOEK6SeCEZOQkLj5M1PxH", "3IelG5zYpWWCZIH4cqWlPV", "2ZBNclC5wm4GtiWaeh0DMx", "3KkXRkHbMCARz0aVfEt68P", "2UVbBKQOdFAekPTRsnkzcf", "0laYHRpNTS6i8FXdupHkJ4", "63irPUP3xB74fHdw1Aw9zR", "7MXVkk9YMctZqd1Srtv4MB", "0hquQWY3xvYqN4qtiquniF", "5enxwA8aAbwZbf5qCHORXi", "2NDMLu8ZNrAsAsPAoW5VOx", "5GYbkDveRD2I8M5ZJ14hWn", "0yLdNVWF3Srea0uzk55zFn", "3GCdLUSnKSMJhs4Tj6CV3s", "1o844wI52S3TjXGBwvGcc7"];
