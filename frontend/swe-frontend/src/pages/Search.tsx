@@ -230,7 +230,7 @@ const Search = () => {
             </Row>
         </Container>
         </div>
-        
+    
         <Modal className="modal" show={modalOpen}>
             <Modal.Header  closeButton onClick={closePopup}></Modal.Header>
             <Modal.Title className="mx-auto mt-1">Are you sure you want to pick this song?</Modal.Title>

@@ -194,6 +194,7 @@ func ProfilePost(c *fiber.Ctx) error {
 	return c.JSON(post)
 }
 
+// function to return user's posts in table
 func getProfilePosts(c *fiber.Ctx) error {
 	var posts1 []PersonalPost
 	email := c.Params("email")
@@ -204,6 +205,7 @@ func getProfilePosts(c *fiber.Ctx) error {
 	return c.JSON(posts1)
 }
 
+// function to return all posts in table 
 func getPosts(c *fiber.Ctx) error {
 	var posts []Post
 	err := DB.Find(&posts).Error

@@ -34,20 +34,6 @@ export const Feed = (props: UserProps) => {
     )();
 });
 
-// const handleClick = async(email: string) => {
-//   console.log("email: " + email); 
-//   const r = await fetch(`http://localhost:8000/api/pofile_posts/${email}`,{
-//     method: 'GET', 
-//     headers: {'Content-Type' : 'application/json'}, 
-//     credentials : 'include',
-
-//   })
-  
-//   const c = await r.json(); 
-//   console.log(c);  // array per email 
-// }; 
-
-// content is the array of posts 
 
 const handleClick = () =>{
   console.log("connecting users");
