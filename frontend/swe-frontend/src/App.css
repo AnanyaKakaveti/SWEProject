@@ -1,8 +1,3 @@
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 .App {
   text-align: center;
   /* background-color: rgb(39, 36, 36); */
@@ -13,6 +8,15 @@
   background-repeat: no-repeat;
   background-size: 100%;
   background-color: black;
+}
+
+.logo{
+  background-color: rgb(255, 255, 255);
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
 body {
@@ -31,6 +35,21 @@ body {
   color: white;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
+}
+
+
+.navbar {
+  background-color: black;
+  margin-left: 5px;
+  border-bottom: none thick green;
+}
+
+.container-fluid{
+  background-color: black;
+}
+
+.nav-item {
+  color: white;
 }
 .feedBackground{
   background-color: blue;
@@ -320,4 +339,13 @@ border-color:rgb(64, 12, 169);
   border-radius: 50%;
   display: inline-block;
   background-size: 100%;
+}
+.small-profile-picture {
+  height: 30px;
+  width: 30px;
+  background-image: url(profile.jpeg);
+  border-radius: 50%;
+  display: inline-block;
+  background-size: 100%;
+  margin-right: 10px;
 }

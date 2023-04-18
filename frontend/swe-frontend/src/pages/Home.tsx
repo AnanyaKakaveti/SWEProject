@@ -76,7 +76,7 @@ const Home: React.FC = () => {
                 console.log(data.tracks);
                 setHomeSongs(data.tracks);
                 // return data.tracks.items[0].id
-            })
+            }) 
         }
         else {
             const s2 = s;

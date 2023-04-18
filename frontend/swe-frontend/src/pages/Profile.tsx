@@ -11,6 +11,7 @@ type ProfileProps = {
 export const Profile = (props: ProfileProps) => {
     var [name, setName] = useState('');
     var [email, setEmail] = useState('');
+    const [content, setContent] = useState<any[]>([]);
     useEffect(() => {
         (
             async () => {
@@ -22,8 +23,28 @@ export const Profile = (props: ProfileProps) => {
                 const content = await reponse.json();
                 setName(content.name);
                 setEmail(content.Email);
+
             }
+            
         )();
+
+    });
+
+    useEffect(() => {
+        (
+            async () => {
+                console.log("email: " + email); 
+                const r = await fetch(`http://localhost:8000/api/profile_posts/${email}`,{
+                method: 'GET', 
+                headers: {'Content-Type' : 'application/json'}, 
+                credentials : 'include',
+                })
+                setContent(await r.json()); 
+                console.log(content);  // array per email 
+            }
+            
+        )();
+
     });
 
 
@@ -52,6 +73,7 @@ export const Profile = (props: ProfileProps) => {
       };
 
 return(
+    <div>
     <main className="form-signin w-100 m-auto">
         {/* <div className="greeting">Welcome to your profile page</div> */}
         <div className="profile-picture"></div>
@@ -66,8 +88,53 @@ return(
         <button className= "btn-primary mt-2" onClick = {() => deleteRow(email)}> <Link to="/" className = "nav-link"> Delete My Account</Link></button>
 
         </div>
-    </main>
-   
+        </main>
+
+        <div className="">
+              <div className="container-fluid">
+    
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {content?.slice(0).reverse().map( (song, i) => {
+                  // var obj = feedS[i];
+                  if (song == "")
+                    return;
+                  return( 
+        
+                    <div key={i}>
+                      <div className="col" > 
+                        <div className="card shadow-sm"> 
+
+                        {/* src={(obj as any)?.album?.images[1]?.url} */}
+                        
+                        <img src={song.SongImg != "" ? song.SongImg : "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Blank_Square.svg/800px-Blank_Square.svg.png"} className="img-fluid img-thumbnail" alt="img" />
+                          <div className="card-body"  style={{display:'flex', justifyContent:'left', paddingBottom:'1px'}}><b>
+                            {song.SongName != "" ? (song?.SongName + " - " + song?.ArtistName) : "unknown song - unknown artist"} 
+                            </b></div>
+                          <div className="card-body">
+                            <div className="card-text" style={{display:'flex', justifyContent:'left'}}>
+                              <div className="small-profile-picture"></div>
+                              <div className="mt-1 mb-3">
+                                {song.name ? song.name : <i>anonymous user</i>}
+                              </div>
+                              
+                            </div>
+                            <p className="card-text" style={{display:'flex', justifyContent:'left'}}>{song.Caption ? song.Caption : <i>no caption</i>}</p>
+                            <div className="d-flex justify-content-between align-items-center">
+                              <div className="btn-group">
+                                <button type="button" className="btn btn-sm btn-outline-secondary">Like</button> 
+                              </div>
+                              <small className="text-muted">Posted 3 minutes ago</small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )})}
+                </div>
+              </div>
+            </div>
+    
+            </div>
 );
 };
 
