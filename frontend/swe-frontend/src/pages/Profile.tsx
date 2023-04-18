@@ -23,20 +23,30 @@ export const Profile = (props: ProfileProps) => {
                 setName(content.name);
                 setEmail(content.Email);
 
-
-                // console.log("email: " + email); 
-                // const r = await fetch(`http://localhost:8000/api/pofile_posts/${email}`,{
-                // method: 'GET', 
-                // headers: {'Content-Type' : 'application/json'}, 
-                // credentials : 'include',
-                // })
-                // const c = await r.json(); 
-                // console.log(c);  // array per email 
             }
             
         )();
 
     });
+
+    useEffect(() => {
+        (
+            async () => {
+                console.log("email: " + email); 
+                const r = await fetch(`http://localhost:8000/api/pofile_posts/${email}`,{
+                method: 'GET', 
+                headers: {'Content-Type' : 'application/json'}, 
+                credentials : 'include',
+                })
+                const c = await r.json(); 
+                console.log(c);  // array per email 
+            }
+            
+        )();
+
+    });
+
+
 
 
     const deleteRow = async (email: string) => {
