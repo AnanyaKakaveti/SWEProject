@@ -84,6 +84,7 @@ type User struct {
 }
 
 type Post struct {
+	Id       	uint  `json: "id"`
 	Email      string `json: "email" gorm: "unique"`
 	Name       string `json:"name"`
 	Song       string `json: "song"`
@@ -171,6 +172,7 @@ func Posts(c *fiber.Ctx) error {
 
 	DB.Create(&post)
 
+	time.AfterFunc(24*time.Hour, func() { DeletePost(c, post.Email)})
 	return c.JSON(post)
 
 	//return c.SendString("Hello, World 👋!")
@@ -201,6 +203,7 @@ func getProfilePosts(c *fiber.Ctx) error {
 	if err != nil {
 		log.Fatal(err)
 	}
+	
 	return c.JSON(posts1)
 }
 
@@ -329,23 +332,74 @@ func DeleteUser(c *fiber.Ctx) error {
 	})
 }
 
-func DeletePosts(c *fiber.Ctx) error {
-	email := c.Params("email")
+func DeletePost(c *fiber.Ctx, email string) error{
+	// email := c.Params("email")
 
 	var post Post
 	if err := DB.Where("email = ?", email).First(&post).Error; err != nil {
-		return err
+	  return err
 	}
-
+  
 	// Delete the user
 	if err := DB.Delete(&post).Error; err != nil {
-		return err
+	  return err
 	}
-
+	
 	return c.JSON(fiber.Map{
-		"message": "success",
+		"message" : "success",
 	})
 }
+
+func checkPosts(c *fiber.Ctx) error{
+	email := c.Params("email")
+	// var present bool = true;
+
+	var post Post
+	//find user: error if usesr not found
+	DB.Where("email = ?", email).First(&post)
+
+	//post not found
+	if post.Id == 0 {
+		c.Status(fiber.StatusNotFound)
+		returnBool(c, false)
+		//Fiber map is a map with a stirng and an interface (can put anythin there)
+	}
+	
+	if post.Id != 0 {
+		returnBool(c, true)
+	}
+	
+	// // Delete the user
+	// if err := DB.Delete(&post).Error; err != nil {
+	// //   return err
+	// }
+
+	return nil
+}
+
+func returnBool (c *fiber.Ctx, present bool) error{
+	return c.JSON(present)
+}
+
+
+func DeleteCheckedPost(c *fiber.Ctx) error{
+	// email := c.Params("email")
+	email := c.Params("email")
+	var post Post
+	if err := DB.Where("email = ?", email).First(&post).Error; err != nil {
+	  return err
+	}
+  
+	// Delete the user
+	if err := DB.Delete(&post).Error; err != nil {
+	  return err
+	}
+	
+	return c.JSON(fiber.Map{
+		"message" : "success",
+	})
+}
+
 
 // func Song(c *fiber.Ctx) error {
 // 	var data map[string]string
@@ -367,6 +421,8 @@ func Setup(app *fiber.App) {
 	app.Get("api/profile_posts/:email", getProfilePosts)
 	app.Get("/api/list", getPosts)
 	app.Delete("/api/deleteuser/:email", DeleteUser)
+	app.Get("/api/checkposts/:email", checkPosts)
+	app.Delete("/api/deletepost/:email", DeleteCheckedPost)
 
 }
 

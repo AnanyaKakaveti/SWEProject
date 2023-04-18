@@ -31,7 +31,20 @@ const Search = () => {
         
         // setSongID(song + randomID);
         // song (ID), songName, artistName, songImg
-        
+        // song = song + randomID
+        // email = name
+        const re = await fetch(`http://localhost:8000/api/checkposts/${email}`)
+        const check = await re.json();
+        console.log(check)
+        if (check) {
+            const response = await fetch(`http://localhost:8000/api/deletepost/${email}`, {
+            method: 'DELETE', 
+            headers: {'Content-Type' : 'application/json'}, 
+            credentials : 'include',
+          })
+        }
+
+
         // email = name // posts DB
         const response = fetch('http://localhost:8000/api/feed', {
             method: 'POST',
