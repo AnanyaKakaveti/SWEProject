@@ -12,6 +12,7 @@ export const Profile = (props: ProfileProps) => {
     var [name, setName] = useState('');
     var [email, setEmail] = useState('');
     const [content, setContent] = useState<any[]>([]);
+    const [imageSrc, setImageSrc] = useState<string | null>(null);
     useEffect(() => {
         (
             async () => {
@@ -47,6 +48,17 @@ export const Profile = (props: ProfileProps) => {
 
     });
 
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+  
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setImageSrc(e.target?.result as string);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
 
     const deleteRow = async (email: string) => {
         // console.log(email)
@@ -76,24 +88,40 @@ return(
     <div>
     <main className="form-signin w-100 m-auto">
         {/* <div className="greeting">Welcome to your profile page</div> */}
-        <div className="profile-picture"></div>
+        {/* <div className="profile-picture"></div> */}
+        {imageSrc && (
+        <img
+          src={imageSrc}
+          alt="Profile Image"
+          style={{ maxWidth: "100px", maxHeight: "100px" }}
+        />
+      )}
 
         <div className ="greeting">
         <h1> {name ? "Hi " + name + "!": "You are not logged in"}</h1> 
 
         <p> {email ? "Email: " + email : "No email is registered"}</p>
-        
+        <form>
+      <div className="form-group">
+        <label htmlFor="exampleFormControlFile1">Upload a profile picture</label>
+        <input type="file" className="form-control-file" id="exampleFormControlFile1" onChange={handleFileChange}></input>
+      </div>
+    </form>
+    
+    <p> </p>
         <button className= "btn-primary"> <Link to="/feed" className="nav-link" >Go back to Feed</Link>  </button>
 
         <button className= "btn-primary mt-2" onClick = {() => deleteRow(email)}> <Link to="/" className = "nav-link"> Delete My Account</Link></button>
+        <h1 className ="greeting"> Your daily songs </h1>
 
         </div>
         </main>
-
+  
         <div className="">
               <div className="container-fluid">
     
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                
                 {content?.slice(0).reverse().map( (song, i) => {
                   // var obj = feedS[i];
                   if (song == "")

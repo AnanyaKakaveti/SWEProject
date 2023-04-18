@@ -147,22 +147,28 @@ useEffect(() => {
             </div>
             <Modal.Body className="mx-auto d-block mt-1"> connect </Modal.Body>
             <div className="modal-body">
-            <ListGroup as="ul">
-            {/* {content?.slice(0).reverse().map( (song, i) => {
+
+
+            
+                {content?.slice(0).reverse().map( (song, i) => {
                   // var obj = feedS[i];
                   if (song == "")
                     return;
                   return( 
-                  } */}
-                
-            {/* <div key={i}> */}
+        
+                    <div key={i}>
+                       <ListGroup as="ul">
+                        <ListGroup.Item action onClick={alertClicked}>
+                        <div className="small-profile-picture"></div>
+                        <div className="mt-1 mb-3">
+                                {song.name ? song.name : <i>anonymous user</i>}
+                        </div>   
+                      </ListGroup.Item>
+                      </ListGroup>                                                 
+                    </div>
+                  )})}
+           
 
-            <ListGroup.Item action onClick={alertClicked}>
-            <div className="profile-picture"></div>
-               user1
-           </ListGroup.Item>
-            {/* } */}
-          </ListGroup>
                 <form>
                 <div className="form-group">
                     <label className="col-form-label"> Message:</label>
