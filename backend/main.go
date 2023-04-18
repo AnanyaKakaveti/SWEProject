@@ -84,19 +84,23 @@ type User struct {
 }
 
 type Post struct {
-	
-	Email   string `json: "email" gorm: "unique"`
-	Name    string `json:"name"`
-	Song    string `json: "song"`
-	Caption string `json: "caption`
+	Email      string `json: "email" gorm: "unique"`
+	Name       string `json:"name"`
+	Song       string `json: "song"`
+	Caption    string `json: "caption`
+	SongName   string `json: "songname`
+	ArtistName string `json: "artistname`
+	SongImg    string `json: "songimage`
 }
 
 type PersonalPost struct {
-	
-	Email   string `json: "email" gorm: "unique"`
-	Name    string `json:"name"`
-	Song    string `json: "song"`
-	Caption string `json: "caption`
+	Email      string `json: "email" gorm: "unique"`
+	Name       string `json:"name"`
+	Song       string `json: "song"`
+	Caption    string `json: "caption`
+	SongName   string `json: "songname`
+	ArtistName string `json: "artistname`
+	SongImg    string `json: "songimage`
 }
 
 func setupRoutes() {
@@ -146,10 +150,9 @@ func Register(c *fiber.Ctx) error {
 	//return c.SendString("Hello, World 👋!")
 }
 
-
 func Posts(c *fiber.Ctx) error {
 	var data map[string]string
-	
+
 	// var postArr [1000][3] string
 
 	if err := c.BodyParser(&data); err != nil {
@@ -157,17 +160,16 @@ func Posts(c *fiber.Ctx) error {
 	}
 
 	post := Post{
-		Email:   data["email"],
-		Name:    data["name"],
-		Song:    data["song"],
-		Caption: data["caption"],
-		// Song: 		data["song"],
+		Email:      data["email"],
+		Name:       data["name"],
+		Song:       data["song"],
+		Caption:    data["caption"],
+		SongName:   data["songname"],
+		ArtistName: data["artistname"],
+		SongImg:    data["songimage"],
 	}
 
-
-
 	DB.Create(&post)
-	
 
 	return c.JSON(post)
 
@@ -180,16 +182,19 @@ func ProfilePost(c *fiber.Ctx) error {
 		return err
 	}
 	post := PersonalPost{
-		Email:   data["email"],
-		Name:    data["name"],
-		Song:    data["song"],
-		Caption: data["caption"],
+		Email:      data["email"],
+		Name:       data["name"],
+		Song:       data["song"],
+		Caption:    data["caption"],
+		SongName:   data["songname"],
+		ArtistName: data["artistname"],
+		SongImg:    data["songimage"],
 	}
 	DB.Create(&post)
 	return c.JSON(post)
 }
 
-func getProfilePosts(c *fiber.Ctx) error{
+func getProfilePosts(c *fiber.Ctx) error {
 	var posts1 []PersonalPost
 	email := c.Params("email")
 	err := DB.Where("email = ?", email).Find(&posts1).Error
@@ -208,8 +213,6 @@ func getPosts(c *fiber.Ctx) error {
 
 	return c.JSON(posts)
 }
-
-
 
 const SecretKey = "secret"
 
@@ -308,39 +311,39 @@ func Logout(c *fiber.Ctx) error {
 
 }
 
-func DeleteUser(c *fiber.Ctx) error{
+func DeleteUser(c *fiber.Ctx) error {
 	email := c.Params("email")
 
 	var user User
 	if err := DB.Where("email = ?", email).First(&user).Error; err != nil {
-	  return err
+		return err
 	}
-  
+
 	// Delete the user
 	if err := DB.Delete(&user).Error; err != nil {
-	  return err
+		return err
 	}
-	
+
 	return c.JSON(fiber.Map{
-		"message" : "success",
+		"message": "success",
 	})
 }
 
-func DeletePosts(c *fiber.Ctx) error{
+func DeletePosts(c *fiber.Ctx) error {
 	email := c.Params("email")
 
 	var post Post
 	if err := DB.Where("email = ?", email).First(&post).Error; err != nil {
-	  return err
+		return err
 	}
-  
+
 	// Delete the user
 	if err := DB.Delete(&post).Error; err != nil {
-	  return err
+		return err
 	}
-	
+
 	return c.JSON(fiber.Map{
-		"message" : "success",
+		"message": "success",
 	})
 }
 
@@ -375,7 +378,6 @@ func main() {
 	Connect()
 
 	app := fiber.New()
-	
 
 	app.Use(cors.New(cors.Config{
 		AllowCredentials: true,

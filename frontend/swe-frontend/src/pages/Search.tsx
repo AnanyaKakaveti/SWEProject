@@ -16,7 +16,10 @@ const Search = () => {
     const [name, setName] = useState('');
     var [email, setEmail] = useState('');
     // const [password, setPassword] = useState('');
-    var [song, setSongID] = useState('');
+    const [song, setSongID] = useState('');
+    const [songname, setSongName] = useState('');
+    const [artistname, setArtistName] = useState('');
+    const [songimage, setSongImg] = useState('');
 
     const [songS, setSongS] = useState({});
     const [modalOpen, setModalOpen] = useState(false);
@@ -25,7 +28,9 @@ const Search = () => {
 
     const handleClick = () => {
         
-        song = song + randomID
+        // setSongID(song + randomID);
+        // song (ID), songName, artistName, songImg
+        
         // email = name // posts DB
         const response = fetch('http://localhost:8000/api/feed', {
             method: 'POST',
@@ -35,9 +40,14 @@ const Search = () => {
                 name,
                 song,
                 caption,
+                songname,
+                artistname,
+                songimage,
             })
+           
         });
-
+        console.log(songname)
+        
         // personal posts DB
         const r = fetch('http://localhost:8000/api/profile', {
             method: 'POST',
@@ -47,6 +57,9 @@ const Search = () => {
                 name,
                 song,
                 caption,
+                songname,
+                artistname,
+                songimage,
             })
         });
 
@@ -139,6 +152,9 @@ const Search = () => {
     function clickedSong(s: any) {
         setSongS(s);
         setSongID(s?.id);
+        setSongName(s?.name);
+        setArtistName(s?.artists[0]?.name);
+        setSongImg(s?.album?.images[1]?.url);
         randomID = (s?.id);
         console.log(randomID);
         popup = true;

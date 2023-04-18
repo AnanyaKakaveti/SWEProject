@@ -33,7 +33,7 @@ export const Profile = (props: ProfileProps) => {
         (
             async () => {
                 console.log("email: " + email); 
-                const r = await fetch(`http://localhost:8000/api/pofile_posts/${email}`,{
+                const r = await fetch(`http://localhost:8000/api/profile_posts/${email}`,{
                 method: 'GET', 
                 headers: {'Content-Type' : 'application/json'}, 
                 credentials : 'include',
@@ -45,8 +45,6 @@ export const Profile = (props: ProfileProps) => {
         )();
 
     });
-
-
 
 
     const deleteRow = async (email: string) => {
