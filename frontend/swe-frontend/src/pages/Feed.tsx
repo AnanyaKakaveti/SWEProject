@@ -1,13 +1,14 @@
 import react, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
-
+import {Container, Form, InputGroup, FormControl, Button, Row, Card, Modal} from 'react-bootstrap';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 type UserProps = {
   name: string
   song: string
 }
 
-
+var popup = false;
 
 
 export const Feed = (props: UserProps) => {
@@ -15,6 +16,7 @@ export const Feed = (props: UserProps) => {
   const [name, setName] = useState('');
   const [song, setSong] = useState('');
   const [content, setContent] = useState<any[]>([]);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     (
@@ -46,6 +48,26 @@ export const Feed = (props: UserProps) => {
 // }; 
 
 // content is the array of posts 
+
+const handleClick = () =>{
+  console.log("connecting users");
+}
+function closePopup() {
+  popup = false;
+  setModalOpen(false);
+  console.log("updated");
+}
+
+function connectUsers() {
+  popup = true;
+  setModalOpen(true);
+  console.log("find Users popup is open");
+  console.log(modalOpen);
+}
+const alertClicked = () => {
+  alert('you connected with another user');
+};
+
 useEffect(() => {
   (
       async () => {
@@ -69,6 +91,7 @@ useEffect(() => {
                 <h1 className="fw-light">Jam Feed</h1>
                 <p className="lead">Wondering what your friends are listening to? Look no further</p>
                 <button className="btn-primary" > <Link to="/profile" className="nav-link" >Go to Profile</Link> </button>
+                <button className="btn-primary" onClick={event => { connectUsers() }}> Conect with Friends </button>
               </div>
             </div>
           </section>
@@ -117,7 +140,42 @@ useEffect(() => {
               </div>
             </div>
     
-    
+            <Modal className="modal" show={modalOpen}>
+            <Modal.Header  closeButton onClick={closePopup}></Modal.Header>
+            <Modal.Title className="mx-auto mt-1">Get connected with friends</Modal.Title>
+            <div className="justify-content-md-center" >
+            </div>
+            <Modal.Body className="mx-auto d-block mt-1"> connect </Modal.Body>
+            <div className="modal-body">
+            <ListGroup as="ul">
+            {/* {content?.slice(0).reverse().map( (song, i) => {
+                  // var obj = feedS[i];
+                  if (song == "")
+                    return;
+                  return( 
+                  } */}
+                
+            {/* <div key={i}> */}
+
+            <ListGroup.Item action onClick={alertClicked}>
+            <div className="profile-picture"></div>
+               user1
+           </ListGroup.Item>
+            {/* } */}
+          </ListGroup>
+                <form>
+                <div className="form-group">
+                    <label className="col-form-label"> Message:</label>
+                    <textarea className="form-control" id="message-text"></textarea>
+                </div>
+                </form>
+            </div>
+            <Modal.Footer>
+                <Link to="/feed">
+                <button className="w-10 btn-lg rounded btn-primary my-2" onClick={closePopup}>Submit</button>
+                </Link> 
+            </Modal.Footer>
+        </Modal>
     </div>
     </main>
       
