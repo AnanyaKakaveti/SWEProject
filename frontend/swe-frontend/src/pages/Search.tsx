@@ -26,7 +26,7 @@ const Search = () => {
     const handleClick = () => {
         
         song = song + randomID
-        // email = name
+        // email = name // posts DB
         const response = fetch('http://localhost:8000/api/feed', {
             method: 'POST',
             headers: {'Content-Type' : 'application/json'}, 
@@ -37,6 +37,20 @@ const Search = () => {
                 caption,
             })
         });
+
+        // personal posts DB
+        const r = fetch('http://localhost:8000/api/profile', {
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'}, 
+            body: JSON.stringify({
+                email,
+                name,
+                song,
+                caption,
+            })
+        });
+
+        
 };
 
     // const [searchInput, setSearchInput] = useState(" ");

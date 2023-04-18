@@ -91,6 +91,14 @@ type Post struct {
 	Caption string `json: "caption`
 }
 
+type PersonalPost struct {
+	
+	Email   string `json: "email" gorm: "unique"`
+	Name    string `json:"name"`
+	Song    string `json: "song"`
+	Caption string `json: "caption`
+}
+
 func setupRoutes() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Simple Server")
@@ -112,7 +120,7 @@ func Connect() {
 
 	DB = connection
 
-	connection.AutoMigrate(&User{}, &Post{})
+	connection.AutoMigrate(&User{}, &Post{}, &PersonalPost{})
 }
 
 func Register(c *fiber.Ctx) error {
@@ -141,6 +149,7 @@ func Register(c *fiber.Ctx) error {
 
 func Posts(c *fiber.Ctx) error {
 	var data map[string]string
+	
 	// var postArr [1000][3] string
 
 	if err := c.BodyParser(&data); err != nil {
@@ -155,20 +164,42 @@ func Posts(c *fiber.Ctx) error {
 		// Song: 		data["song"],
 	}
 
+
+
 	DB.Create(&post)
+	
 
 	return c.JSON(post)
 
 	//return c.SendString("Hello, World 👋!")
 }
 
+func ProfilePost(c *fiber.Ctx) error {
+	var data map[string]string
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+	post := PersonalPost{
+		Email:   data["email"],
+		Name:    data["name"],
+		Song:    data["song"],
+		Caption: data["caption"],
+	}
+	DB.Create(&post)
+	return c.JSON(post)
+}
+
+func getProfilePosts(c *fiber.Ctx) error{
+	var posts1 []PersonalPost
+	email := c.Params("email")
+	err := DB.Where("email = ?", email).Find(&posts1).Error
+	if err != nil {
+		log.Fatal(err)
+	}
+	return c.JSON(posts1)
+}
 
 func getPosts(c *fiber.Ctx) error {
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	//defer DB.Close()
-
 	var posts []Post
 	err := DB.Find(&posts).Error
 	if err != nil {
@@ -329,6 +360,8 @@ func Setup(app *fiber.App) {
 	app.Post("/api/logout", Logout)
 
 	app.Post("/api/feed", Posts)
+	app.Post("api/profile", ProfilePost)
+	app.Get("api/profile_posts/:email", getProfilePosts)
 	app.Get("/api/list", getPosts)
 	app.Delete("/api/deleteuser/:email", DeleteUser)
 

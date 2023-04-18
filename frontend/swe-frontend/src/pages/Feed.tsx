@@ -9,8 +9,9 @@ type UserProps = {
 
 
 
-export const Feed = (props: UserProps) => {
 
+export const Feed = (props: UserProps) => {
+  const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [song, setSong] = useState('');
 
@@ -25,9 +26,23 @@ export const Feed = (props: UserProps) => {
             const content = await reponse.json();
             setName(content.name);
             setSong(content.songS);
+            setEmail(content.Email); 
         }
     )();
 });
+
+const handleClick = async(email: string) => {
+  console.log("email: " + email); 
+  const r = await fetch(`http://localhost:8000/api/pofile_posts/${email}`,{
+    method: 'GET', 
+    headers: {'Content-Type' : 'application/json'}, 
+    credentials : 'include',
+
+  })
+  
+  const c = await r.json(); 
+  console.log(c);  // array per email 
+}; 
 
 // content is the array of posts 
 useEffect(() => {
@@ -52,6 +67,7 @@ useEffect(() => {
       <h1 className="fw-light">Jam Feed</h1>
       <p className="lead">Wondering what your friends are listening to? Look no further</p>
       <button className="btn-primary" > <Link to="/profile" className="nav-link" >Go to Profile</Link> </button>
+      {/* onClick={() => handleClick(email)} */}
     </div>
   </div>
 </section>
