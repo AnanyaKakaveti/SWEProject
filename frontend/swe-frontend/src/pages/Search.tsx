@@ -18,7 +18,7 @@ const Search = () => {
     // const [password, setPassword] = useState('');
     var [song, setSongID] = useState('');
 
-    const [songS, setSongS] = useState({});
+    const [songS, setSongS] = useState({}); 
     const [modalOpen, setModalOpen] = useState(false);
     const [caption, setCaption] = useState('');
     // var [check, checkPresent] = useState(false)
